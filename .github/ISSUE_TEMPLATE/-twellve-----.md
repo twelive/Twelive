@@ -1,7 +1,7 @@
 ---
 name: "[Twellve - ] "
 about: Describe this issue template's purpose here.
-title: ''
+title: "[Twellve - part] issue "
 labels: ''
 assignees: MyoungHwaShin
 
