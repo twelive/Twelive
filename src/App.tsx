@@ -1,10 +1,10 @@
 import React from 'react';
-import Logo from './assets/common-logo.svg';
+import GlobalStyles from './GlobalStyles';
+
 function App() {
   return (
     <>
-      <h1>Twelive</h1>
-      <img src={Logo} alt="로고" />
+      <GlobalStyles />
     </>
   );
 }
