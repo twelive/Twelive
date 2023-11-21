@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import NavButton from '../components/NavButton';
 import commonHome from '../assets/common-home.svg';
-import commonHomeClick from '../assets/common-home-click.svg';
+// import commonHomeClick from '../assets/common-home-click.svg';
 import commonShorts from '../assets/common-shorts.svg';
 import commonSubscribe from '../assets/common-subscribe.svg';
 import commonMe from '../assets/common-me.svg';
@@ -25,4 +25,13 @@ const NavBox = styled.nav`
   justify-content: space-between;
   width: 24.375rem;
   height: 3.0625rem;
+  position: fixed;
+  bottom: 0.625rem;
 `;
+
+/* 추후 화면 설정
+const Back = styled.div`
+  position: relative;
+  height: 100vh;
+`;
+*/
