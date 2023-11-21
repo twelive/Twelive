@@ -8,6 +8,7 @@
 #   <타입> 리스트  
 #   Feat        : 새로운 기능 추가  
 #   Fix         : 버그 수정 
+#   Bug         : 버그 발생
 #   Refactor    : 코드 리팩토링  
 #   MarkUp      : 마크업 (HTML) 변경
 #   Design      : 사용자 UI 디자인 변경  

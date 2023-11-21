@@ -1,11 +1,10 @@
 import React from 'react';
-
+import Logo from '@assets/common-logo.svg';
 function App() {
   return (
     <>
       <h1>Twelive</h1>
-      <img src="./assets/common-logo.svg" alt="로고" />
-      <img src="./assets/summer.jpg" alt="프로필" />
+      <img src={Logo} alt="로고" />
     </>
   );
 }
