@@ -1,10 +1,11 @@
 import React from 'react';
-import GlobalStyles from './styles/GlobalStyles';
-import NavBar from './layouts/NavBar';
+import GlobalStyles from './GlobalStyles';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Header from './layouts/Header';
+import NavBar from './layouts/NavBar';
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
+import theme from './theme';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <GlobalStyles />
       <ThemeProvider theme={theme}>
         <Provider store={store}>
+          <Header />
           <NavBar />
         </Provider>
       </ThemeProvider>
