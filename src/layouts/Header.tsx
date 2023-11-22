@@ -1,3 +1,4 @@
+
 import React, { ReactElement } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled, { ThemeProvider } from "styled-components";
@@ -42,22 +43,27 @@ function Header(): ReactElement {
   <HeadBar>
 
     <Div className='buttonContainer'>
-      {isMobile && <HeaderButton buttonClass="homeButton" src={mainlogo} title="트웰브 홈으로">
+      {isMobile && <HeaderButton buttonClass="homeButton" src={mainlogo} imgClass='homelogo' title="트웰브 홈으로">
 
   </HeaderButton>}
-  {(isLaptop || isDesktop) && (<div className ='leftContainer'>  <HeaderButton buttonClass="hamburger" src={menu} title="상세 메뉴">
+  {(isLaptop || isDesktop) && (<Div className ='leftContainer'>  <HeaderButton buttonClass="hamburger" src={menu} title="상세 메뉴">
 
-</HeaderButton> <HeaderButton buttonClass="homeButton" src={mainlogo} title="트웰브 홈으로">
+</HeaderButton> <HeaderButton buttonClass="homeButton" imgClass='homelogo' src={mainlogo} title="트웰브 홈으로">
 
-</HeaderButton> </div>)}
+</HeaderButton> </Div>)}
   
   
-  
+
+
+
+
+
+
   {isMobile &&  <div><HeaderButton buttonClass="searchButton" src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} title="사용자 ">
   </HeaderButton></div>}
 
-  {(isLaptop || isDesktop) && ( <div className='searchWrapper'>
-    <div className='searchContainer'><form id="form" name="form" action="" method="get">
+  {(isLaptop || isDesktop) && ( <Div className='searchWrapper'>
+    <Div className='searchContainer'><form id="form" name="form" action="" method="get">
             <div className="search-wrapper">
                 <fieldset className="search">
                     <input type="text" className="searchTxt" name="searchTxt" title="영상검색" placeholder="검색"/>
@@ -66,13 +72,20 @@ function Header(): ReactElement {
 </form>
 <HeaderButton buttonClass='searchButton' src={search} title='영상검색' ></HeaderButton>
 
-      </div> <HeaderButton buttonClass='searchButton' src={mic} title='음성검색' ></HeaderButton>
-  </div>)}
+      </Div> <HeaderButton buttonClass='micButton' src={mic} title='음성검색' ></HeaderButton>
+  </Div>)}
   
 
 
+
+
+
+
+
   {(isLaptop || isDesktop) && (<div>
-    <HeaderButton buttonClass="loginButton" src={login} title="사용자"><span>로그인</span>
+    <HeaderButton buttonClass="loginButton" src={login} title="사용자"><Div className='login'><span>로그인</span></Div>
+   
+    
   </HeaderButton>
   </div>)}
   
@@ -104,19 +117,64 @@ box-shadow: 1px 1px 4px 0px #D4D4D4;
 
 
 const Div = styled.div `
+&.leftContainer {
+
+display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  /* transform: translate(0, 50%); */
+  align-items: center;
+  /* justify-content: center; */
+}
 &.buttonContainer {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  transform: translate(0, 50%);
-
+  /* transform: translate(0, 50%); */
+  align-items: center;
+  /* justify-content: center; */
+  
+}
+&.searchContainer {
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  right: 0;
+  input {
+    box-sizing: border-box;
+    border-radius: 20px 0 0 20px;
+    padding: 8px;
+    height: 35px;
+    @media ${(props) => props.theme.tablet}{
+      width: 300px;
+    }
+    @media ${(props) => props.theme.laptop}{
+      width: 500px;
+    }
     
-
 }
 
-&.searchWrapper {
-  
+}
+    
 
+&.searchWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 60%;
+  
+  
+}
+
+&.login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 `;

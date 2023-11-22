@@ -7,18 +7,23 @@ interface HeaderButtonProps {
   buttonClass: string;
   className?: string;
   children?: ReactNode;
+  imgClass?: string;
 }
 
-function HeaderButton ({ src, title, buttonClass,children }: HeaderButtonProps) {
+function HeaderButton ({ src, title, buttonClass,children, imgClass }: HeaderButtonProps) {
 
   return (
     <Button type="button" className={buttonClass}>
-      <img src={src}  alt={title} />
+      <Img src={src} className={imgClass}  alt={title} />
       {children}
     </Button>
   );
 
 }
+
+
+
+export default HeaderButton
 
 const Button = styled.button`
 border-style: none;
@@ -28,8 +33,8 @@ background-color: transparent;
 cursor: pointer;
 
 &.homeButton {
-  height: 30px;  
-  
+  height: 50px;
+
   
   
   }
@@ -38,6 +43,7 @@ cursor: pointer;
   
   &.searchButton {
     height: 2.5rem;
+    
   }
   &.hamburger {
     height: 1.5rem;
@@ -49,27 +55,17 @@ cursor: pointer;
     height: 2.125rem;
   }
 
-  
-
-
-@media ${(props) => props.theme.mobile} {
-  &.homeButton {
-    
-  
-  
-  
-  }
-  
-  &.searchButton {
-  
-  }
-  
-  
-  &.loginButton {
-
+  &.micButton {
+   border-radius: 100%;
+   background-color: red;
+   height: 35px;
+   margin-left: 10px;
   }
 
-};
+  
+
+
+
 @media ${(props) => props.theme.tablet} {
   &.homeButton {
    
@@ -77,11 +73,24 @@ cursor: pointer;
   };
   
   &.searchButton {
-
+    border-radius: 0 20px 20px 0;
+    border: 1px solid;
+    height: 35px;
+    border-left: none;
+   
   };
   
   
   &.loginButton {
+
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    height: 35px;
+    background-color: purple;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 
   };
 };
@@ -93,16 +102,30 @@ cursor: pointer;
   };
   
   &.searchButton {
+    border-radius: 0 20px 20px 0;
+    border: 1px solid;
+    height: 35px;
+    border-left: none;
 
   };
   
   
   &.loginButton {
 
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    height: 35px;
+    background-color: purple;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   };
 };
 `;
 
-
-export default HeaderButton
-
+const Img = styled.img`
+&.homelogo {
+  height: 40px;
+}
+`;
