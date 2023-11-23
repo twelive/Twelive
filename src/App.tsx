@@ -13,9 +13,11 @@ function App() {
     <>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
+      <Provider store={store}>
         <Menubar/>
         <Header/>
         <NavBar />
+        </Provider>
       </ThemeProvider>
     </>
   );
