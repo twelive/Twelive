@@ -59,7 +59,7 @@ table {
 				--point-opacity: 50%;
         --font-reqular: 1rem;
         --font-small: 0.8rem;
-
+        --primary-margin: 1.25rem;
     }
 
 `;
