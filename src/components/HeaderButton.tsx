@@ -1,10 +1,12 @@
+import GlobalStyles from '../GlobalStyles';
 import React, { ReactNode } from 'react';
 import styled, { ThemeProvider } from "styled-components";
+
 
 interface HeaderButtonProps {
   src: string;
   title: string;
-  buttonClass: string;
+  buttonClass?: string;
   className?: string;
   children?: ReactNode;
   imgClass?: string;
@@ -31,25 +33,59 @@ box-sizing: border-box;
 height: 1.5rem;
 background-color: transparent;
 cursor: pointer;
+&.arrayOption {
+  display: flex;
+  flex-direction: row;
+    vertical-align: middle;
+    align-items: center;
+
+}
+
+&.roundedOption {
+  border: 0.05rem solid var(--button-border-color);
+    height: 2.1875rem;
+    border-radius: 1.25rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    &:hover {
+      border: 0.05rem solid var(--primary-color);
+      background-color: var(--button-hover-color)
+    }
+}
+&.searchOption {
+  border-radius: 0 1.25rem 1.25rem 0;
+    border: 0.05rem solid var(--button-border-color);
+     border-left: none;
+    background-color: var(--button-color);
+    &:hover {
+      background-color: #DEDEDE;
+    }
+    @media ${(props) => props.theme.tablet} {
+
+      width: 2.8125rem;
+
+};
+@media ${(props) => props.theme.laptop} {
+
+
+width: 3.4375rem;
+
+
+};
+
+}
 
 &.homeButton {
-  height: 50px;
-
-  
-  
+  height: 3.125rem;
   }
 
   
   
   &.searchButton {
-    height: 2.5rem;
+    height: 2.1875rem;
     
   }
-  &.hamburger {
-    height: 1.5rem;
-    
-  }
-  
+
   
   &.loginButton {
     height: 2.125rem;
@@ -57,75 +93,45 @@ cursor: pointer;
 
   &.micButton {
    border-radius: 100%;
-   background-color: red;
-   height: 35px;
-   margin-left: 10px;
+   height: 2.1875rem;
+   margin-left: 0.625rem;
+   &:hover {
+    background-color: var(--button-hover-color);
+
+   }
   }
 
   
 
 
 
-@media ${(props) => props.theme.tablet} {
-  &.homeButton {
-   
-  
-  };
-  
-  &.searchButton {
-    border-radius: 0 20px 20px 0;
-    border: 1px solid;
-    height: 35px;
-    border-left: none;
-   
-  };
-  
-  
-  &.loginButton {
 
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
-    height: 35px;
-    background-color: purple;
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-
-  };
-};
-@media ${(props) => props.theme.laptop} {
-  &.homeButton {
-   
-
-  
-  };
-  
-  &.searchButton {
-    border-radius: 0 20px 20px 0;
-    border: 1px solid;
-    height: 35px;
-    border-left: none;
-
-  };
-  
-  
-  &.loginButton {
-
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
-    height: 35px;
-    background-color: purple;
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-  };
-};
 `;
 
 const Img = styled.img`
 &.homelogo {
-  height: 40px;
+  height: 2.5rem;
+}
+&.hamburger {
+  height: 1.5rem;
+  padding: 5px;
+  border-radius: 100%;
+    width: 1.5rem;
+    margin-right: 15px;
+    &:hover {
+      
+      background-color: var(--button-hover-color);
+    }  
+}
+
+&.mobileImg {
+  padding: 5px;
+  border-radius: 100%;
+  &:hover {
+      
+      background-color: var(--button-hover-color);
+    }
 }
 `;
+
+
