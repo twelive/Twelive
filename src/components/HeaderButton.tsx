@@ -10,13 +10,14 @@ interface HeaderButtonProps {
   className?: string;
   children?: ReactNode;
   imgClass?: string;
+  onClick?: () => void;
 }
 
-function HeaderButton ({ src, title, buttonClass,children, imgClass }: HeaderButtonProps) {
+function HeaderButton ({ src, title, buttonClass,children, imgClass, onClick }: HeaderButtonProps) {
 
   return (
     <Button type="button" className={buttonClass}>
-      <Img src={src} className={imgClass}  alt={title} />
+      <Img src={src} className={imgClass}  alt={title} onClick={onClick} />
       {children}
     </Button>
   );
