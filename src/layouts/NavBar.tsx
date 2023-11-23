@@ -37,16 +37,14 @@ export default NavBar;
 
 const NavBox = styled.nav`
   display: flex;
-  justify-content: space-between;
-  width: 24.375rem;
+  justify-content: space-evenly;
+  width: 100%;
   height: 3.0625rem;
   position: fixed;
-  bottom: 0.625rem;
-`;
+  bottom: 0rem;
+  background-color: white;
 
-/* 추후 화면 설정
-const Back = styled.div`
-  position: relative;
-  height: 100vh;
+  @media ${(props) => props.theme.laptop} {
+    display: none;
+  }
 `;
-*/

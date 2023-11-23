@@ -1,5 +1,6 @@
 
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import styled, { ThemeProvider } from "styled-components";
 import mainlogo from '../assets/common-logo.svg';
@@ -7,8 +8,10 @@ import search from '../assets/common-search.svg';
 import login from '../assets/common-login.svg';
 import menu from '../assets/common-menu.svg';
 import mic from '../assets/common-mic.svg'
-import theme from '../../src/theme';
+import blacksun from '../assets/common-blacksun.svg';
 import HeaderButton from '../components/HeaderButton';
+import MenuBar from '../layouts/MenuBar';
+import theme from '@/theme';
 
 
 
@@ -21,13 +24,14 @@ import HeaderButton from '../components/HeaderButton';
 interface Head {
 Button?: string;
 className: string;
-// src: string;
 alt: string;
-
+onClick?: () => void;
 }
 
 function Header(): ReactElement {
 
+  const dispatch = useDispatch();
+  const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
   const isMobile = useMediaQuery ({
     query : "(min-width : 20rem) and (max-width : 47.9375rem)"
   })
@@ -38,6 +42,11 @@ function Header(): ReactElement {
     query : "(min-width : 63.1875rem) and (max-width : 120rem)"
   })
 
+  const handleToggle = () => {
+    dispatch({ type: 'click', value: toggleMenu });
+  };
+ 
+
   return (  <>
   
   <HeadBar>
@@ -46,7 +55,9 @@ function Header(): ReactElement {
       {isMobile && <HeaderButton buttonClass="homeButton" src={mainlogo} imgClass='homelogo' title="트웰브 홈으로">
 
   </HeaderButton>}
-  {(isLaptop || isDesktop) && (<Div className ='leftContainer containerOption'>  <HeaderButton buttonClass='hamburgerButton arrayOption'  imgClass="hamburger" src={menu} title="상세 메뉴">
+  {(isLaptop || isDesktop) && (<Div className ='leftContainer containerOption'> 
+   <HeaderButton buttonClass='hamburgerButton arrayOption'  imgClass="hamburger" src={menu} title="상세 메뉴" onClick={handleToggle}
+>
 
 </HeaderButton> <HeaderButton buttonClass="homeButton" imgClass='homelogo' src={mainlogo} title="트웰브 홈으로">
 
@@ -59,8 +70,8 @@ function Header(): ReactElement {
 
 
 
-  {isMobile &&  <div><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} imgClass='mobileImg' title="사용자 ">
-  </HeaderButton></div>}
+  {isMobile &&  <Div className='containerOption'><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} imgClass='mobileImg' title="사용자 ">
+  </HeaderButton> <HeaderButton buttonClass='darkmodeButton ' src={blacksun} title='다크모드' imgClass='darkMode'></HeaderButton></Div>}
 
   {(isLaptop || isDesktop) && ( <Div className='searchWrapper containerOption'>
     <Div className='searchContainer containerOption'><form id="form" name="form" action="" method="get">
@@ -82,12 +93,12 @@ function Header(): ReactElement {
 
 
 
-  {(isLaptop || isDesktop) && (<div>
+  {(isLaptop || isDesktop) && (<Div className='rightContainer'>
     <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span>로그인</span></Div>
    
     
   </HeaderButton>
-  </div>)}
+  </Div>)}
   
 
 
@@ -138,7 +149,6 @@ const Div = styled.div `
 &.searchContainer {
   
   justify-content: center;
-  min-width: 300px;
   right: 0;
   input {
     box-sizing: border-box;
@@ -148,10 +158,11 @@ const Div = styled.div `
     height: 35px;
     
     @media ${(props) => props.theme.tablet}{
-      width: 300px;
+      width: 350px;
     }
     @media ${(props) => props.theme.laptop}{
       width: 500px;
+
     }
     
 }

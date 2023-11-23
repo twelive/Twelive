@@ -6,6 +6,10 @@ interface NavState {
   navMenu: string;
 }
 
+interface ToggleState {
+  toggleMenu: boolean;
+}
+
 interface DataState {
   data: JsonObject;
 }
@@ -18,6 +22,11 @@ interface DetailState {
 type NavAction = {
   type: 'click';
   payload?: string;
+};
+
+type ToggleAction = {
+  type: 'click';
+  value?: boolean;
 };
 
 interface ClickAction {

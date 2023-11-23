@@ -75,6 +75,7 @@ export default MainListPage;
 const Main = styled.div`
   width: 100%;
   margin-left: 12px;
+  padding-top: 20px;
   gap: 20px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);

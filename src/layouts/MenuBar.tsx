@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from "styled-components";
 import menu from '../assets/common-menu.svg';
 import home from '../assets/common-home.svg';
@@ -17,157 +18,66 @@ import educate from '../assets/common-educate.svg';
 import podcast from '../assets/common-podcast.svg';
 import mainlogo from '../assets/common-logo.svg';
 
-interface Menu {
-  Button?: string;
-  className: string;
-  alt: string;
+interface VisibleMenuProps {
+  isActive: boolean;
 }
 
-interface VisibleMenuProps {
-    isActive: boolean;
-  }
-  
-  function MenuBar(): ReactElement {
-    const [isActive, setIsActive] = useState(false);
-  
-    
-    const toggleMenu = () => {
-      setIsActive(!isActive);
-    };
+function MenuBar(): ReactElement {
+  const dispatch = useDispatch();
+  const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
+  const [activeButton, setActiveButton] = useState('');
 
-    
+  const handleToggle = () => {
+    dispatch({ type: 'click', value: toggleMenu });
+  };
+
+  const handleButtonClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
+
+  const menuItems = [
+    { name: 'home', icon: home, label: 'Home' },
+    { name: 'shorts', icon: shorts, label: 'Shorts' },
+    { name: 'subscribe', icon: subscribe, label: 'Subscribe' },
+    { name: 'me', icon: me, label: 'Me' },
+    { name: 'history', icon: history, label: 'History' },
+    { name: 'rank', icon: rank, label: 'Rank' },
+    { name: 'shopping', icon: shopping, label: 'Shopping' },
+    { name: 'music', icon: music, label: 'Music' },
+    { name: 'movie', icon: movie, label: 'Movie' },
+    { name: 'live', icon: live, label: 'Live' },
+    { name: 'game', icon: game, label: 'Game' },
+    { name: 'sports', icon: sports, label: 'Sports' },
+    { name: 'educate', icon: educate, label: 'Educate' },
+    { name: 'podcast', icon: podcast, label: 'Podcast' },
+  ];
+
   return (
     <>
-      <MenuBarContainer>
-        <Div className='buttonContainer'>
-            <img src={menu} alt="메뉴 버튼" className="menu" onClick={toggleMenu}/>
+      {toggleMenu && <Backdrop />}
+      <VisibleMenu isActive={toggleMenu}>
+        <Div>
+          <Button className='activeTotalLogo'>
+            <img src={menu} alt="메뉴" className="menu" onClick={handleToggle} /> 
+          </Button>
+          <Button className='activeTotalLogo'>
+            <img src={mainlogo} alt="트웰리브" className="manilogo" onClick={handleToggle} />  
+          </Button>
         </Div>
-      </MenuBarContainer>
-
-      {isActive && (
-        <Backdrop />
-      )}
-        <VisibleMenu isActive={isActive}>
-          {
-            <>
-            <Div className='activeTotalLogo'>
-              <Button>
-                <img src={menu} alt="메뉴" className="menu" onClick={toggleMenu}/> 
-                </Button>
-                <Button>
-                <img src={mainlogo} alt="트웰리브" className="manilogo" onClick={toggleMenu}/>  
+        <Ul>
+          {menuItems.map((item) => (
+            <Li key={item.name}>
+              <Button
+                className={`${item.name}Button ${activeButton === item.name ? 'active' : ''}`}
+                onClick={() => handleButtonClick(item.name)}
+              >
+                <img src={item.icon} alt={item.label} className={item.name} />
+                <Lable>{item.label}</Lable>
               </Button>
-            </Div>
-          
-          
-          <Ul>
-
-            <Li>
-            <Button className="homeButton">
-            <img src={home} alt="홈" className="home" /> 
-            <Lable>Home</Lable>
-            </Button>
             </Li>
-
-            <Li>
-            <Button className="shortsButton">
-            <img src={shorts} alt="쇼츠" className="shorts" />
-            <Lable>Shorts</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="subscribeButton">
-            <img src={subscribe} alt="구독" className="subscribe" />
-            <Lable>subscribe</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="meButton">
-            <img src={me} alt="나" className="me" />
-            <Lable>me</Lable>
-            </Button>
-            </Li>
-            
-            <Li>
-            <Button className="historyButton">
-            <img src={history} alt="시청기록" className="history" />
-            <Lable>history</Lable>
-            </Button>
-            </Li>
-
-            <p>
-              탐색
-            </p>
-
-            <Li>
-            <Button className="rankButton">
-            <img src={rank} alt="인기 급상승" className="rank" />
-            <Lable>rank</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="shoppingButton">
-            <img src={shopping} alt="쇼핑" className="shopping" />
-            <Lable>shopping</Lable>
-            </Button>
-            </Li>
-            
-            <Li>
-            <Button className="musicButton">
-            <img src={music} alt="음악" className="music" />
-            <Lable>music</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="movieButton">
-            <img src={movie} alt="영화" className="movie" />
-            <Lable>movie</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="liveButton">
-            <img src={live} alt="실시간" className="live" />
-            <Lable>live</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="sportsButton">
-            <img src={sports} alt="스포츠" className="sports" />
-            <Lable>sports</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="sportsButton">
-            <img src={game} alt="게임" className="game" />
-            <Lable>game</Lable>
-            </Button>
-            </Li>
-            
-            <Li>
-            <Button className="educateButton">
-            <img src={educate} alt="학습" className="educate" />
-            <Lable>educate</Lable>
-            </Button>
-            </Li>
-
-            <Li>
-            <Button className="podcastButton">
-            <img src={podcast} alt="팟캐스트" className="podcast" />
-            <Lable>podcast</Lable>
-            </Button>
-            </Li>
-
-          </Ul>
-            </>
-          }
-        </VisibleMenu>
+          ))}
+        </Ul>
+      </VisibleMenu>
     </>
   );
 }
@@ -178,21 +88,19 @@ const MenuBarContainer = styled.div`
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   height: 2rem;
-  
-  `;
+`;
 
 const Div = styled.div`
-    padding-left: 0.75rem;
+  padding-left: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  cursor: pointer;
+  &.activeTotalLogo {
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
-    cursor: pointer;
-    &.activeTotalLogo{
-      display: flex;
-      flex-direction: row;
-    }
-  `;
-
+  }
+`;
 
 const Button = styled.button`
   width: 100%;
@@ -213,39 +121,43 @@ const Button = styled.button`
     color: black;
     border-radius: 8px;
   }
-  &.subscribeButton{
+
+  &.activeTotalLogo:hover {
+    background-color: white;
+  }
+  &.subscribeButton {
     border-bottom: 1px solid #D4D4D4;
   }
-  &.historyButton{
+  &.historyButton {
     border-bottom: 1px solid #D4D4D4;
   }
   
-  `;
+  &.active {
+    background-color: #045adc;
+    color: black;
+    border-radius: 8px;
+  }
+`;
 
 const Ul = styled.ul` 
-    display: flex;
-    flex-direction: column;
-    padding-left: 0.75rem;
-    `;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.75rem;
+`;
 
 const Li = styled.li`
-    padding-top: 5px;
-    padding-bottom: 5px;
-    vertical-align:middle;
-    align-items: center;
-    text-align: center;
-    &.activeMain {
-      display: flex;
-      flex-direction: row;
-    }
-    
-    `;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+`;
 
 const Lable = styled.p`
- margin-top: 5px; 
- text-align: center;
- padding-left:10px;
- `;
+  margin-top: 5px; 
+  text-align: center;
+  padding-left: 10px;
+`;
 
 const VisibleMenu = styled.div<VisibleMenuProps>`
   width: 250px;
@@ -258,8 +170,7 @@ const VisibleMenu = styled.div<VisibleMenuProps>`
   backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
   z-index: 999; 
   overflow-y: scroll;
-  `;
-
+`;
 
 const Backdrop = styled.div`
   width: 100%;
