@@ -14,7 +14,6 @@ function DetailPage() {
         );
         const data = await response.json();
         useDetailData(data.items);
-        console.log(data.items);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -38,10 +37,8 @@ function DetailPage() {
                 <SubTextBox>
                   <SubTitleText>{item.snippet.title} </SubTitleText>
                   <SubTimeBox>
-                    <SubChannelTitle>
-                      {item.snippet.channelTitle}
-                    </SubChannelTitle>
-                    <SubTime>{item.snippet.publishedAt}</SubTime>
+                    <p>{item.snippet.channelTitle}</p>
+                    <p>{item.snippet.publishedAt.slice(0, 10)}</p>
                   </SubTimeBox>
                 </SubTextBox>
               </SubBox>
@@ -54,12 +51,10 @@ function DetailPage() {
 export default DetailPage;
 
 const MainBox = styled.div`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
+  margin: 0 0 4.3125rem 1.25rem;
 `;
 
-const MainImgBox = styled.div`
+/* const MainImgBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -107,35 +102,41 @@ const MainCommentBox = styled.div`
 const MainCommentText = styled.p`
   font-size: 13px;
   // 추후 여기다가 스타일링해서 작성하면 될듯합니다.
-`;
+`; */
 
 const SubBox = styled.div`
   display: flex;
+  gap: 0.5rem;
   margin-top: 20px;
-  margin-left: 20px;
 `;
 
 const SubImgBox = styled.div`
-  padding-bottom: 10px;
+  cursor: pointer;
 `;
 
 const SubImg = styled.img`
+  width: 10.5rem;
+  height: 5.875rem;
   object-fit: cover;
-  width: 200%;
-  border-radius: 20px;
+  border-radius: 0.625rem;
 `;
 
 const SubTextBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  gap: 0.5rem;
+  opacity: 70%;
+  cursor: pointer;
 `;
 
-const SubChannelTitle = styled.p``;
+const SubTitleText = styled.p`
+  font-weight: 600;
+`;
 
 const SubTimeBox = styled.div`
   display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
 `;
-
-const SubTitleText = styled.p``;
-
-const SubTime = styled.p``;
