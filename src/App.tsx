@@ -6,6 +6,8 @@ import Header from './layouts/Header';
 import NavBar from './layouts/NavBar';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
+import MainListPage from '../src/pages/MainListPage';
+import Menubar from './layouts/MenuBar';
 
 function App() {
   return (
@@ -14,8 +16,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <Header />
-          <NavBar />
-        </Provider>
+          <MainListPage
+            url={''}
+            title={''}
+            channelTitle={''}
+            publishedAt={''}
+          />
+        <Menubar/>
+        <NavBar />
       </ThemeProvider>
     </>
   );
