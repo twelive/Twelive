@@ -49,6 +49,19 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+        --primary-color: #045ADC;
+        --point-color: #045ADC;
+				--button-color: #FAFAFA;
+				--button-border-color: #CCCCCC;
+				--button-hover-color:  rgba(4, 90, 220, 0.5);
+				--point-opacity: 50%;
+        --font-reqular: 1rem;
+        --font-small: 0.8rem;
+
+    }
+
 `;
 
 export default GlobalStyles;

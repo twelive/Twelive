@@ -5,6 +5,7 @@ import store from './store/store';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import Router from './Router';
+import Menubar from './layouts/MenuBar';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Provider store={store}>
           <Router />
         </Provider>
+        <Menubar />
       </ThemeProvider>
     </>
   );
