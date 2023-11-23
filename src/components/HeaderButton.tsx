@@ -41,7 +41,20 @@ cursor: pointer;
     align-items: center;
 
 }
+&.hamburgerButton {
+  width: 35px;
+  height: 35px;
+}
+&.darkmodeButton {
+  margin-top: 3px;
+  height: 2.1875rem;
+  width: 2.1875rem;
+  border-radius: 100%;
+  &:hover {
 
+    background-color: var(--button-hover-color);
+  }
+}
 &.roundedOption {
   border: 0.05rem solid var(--button-border-color);
     height: 2.1875rem;
@@ -114,7 +127,8 @@ const Img = styled.img`
   height: 2.5rem;
 }
 &.hamburger {
-  height: 1.5rem;
+  /* height: 35px;
+  width: 35px; */
   padding: 5px;
   border-radius: 100%;
     width: 1.5rem;
@@ -132,6 +146,11 @@ const Img = styled.img`
       
       background-color: var(--button-hover-color);
     }
+}
+
+&.darkMode {
+  width: 22px;
+  height: 22px;
 }
 `;
 
