@@ -1,4 +1,3 @@
-import NavBar from '../layouts/NavBar';
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
@@ -25,42 +24,72 @@ function MainListPage({ title, channelTitle, publishedAt, url }: ListItem) {
     fetchData();
   }, []);
 
+  const MainClick = () => {
+    console.log(123);
+  };
+
   return (
-    <>
+    <Main>
       {data &&
         data.items.map((item: any, index: number) => (
-          <MainBox key={index}>
-            <MainImg
-              src={item.snippet.thumbnails.maxres.url}
-              alt={item.snippet.title}
-            />
-            <SubBox>
-              <InfoBox>
-                <TitleTxt>{item.snippet.title}</TitleTxt>
-                <SubTxt>
-                  {item.snippet.channelTitle}﹒
-                  {item.snippet.publishedAt.slice(0, 10)}
-                </SubTxt>
-              </InfoBox>
-            </SubBox>
+          <MainBox key={index} onClick={MainClick}>
+            <ImgBox>
+              <MainImg
+                src={item.snippet.thumbnails.maxres.url}
+                alt={item.snippet.title}
+              />
+              <SubBox>
+                <InfoBox>
+                  <TitleTxt>{item.snippet.title}</TitleTxt>
+                  <SubTxt>
+                    {item.snippet.channelTitle}﹒
+                    {item.snippet.publishedAt.slice(0, 10)}
+                  </SubTxt>
+                </InfoBox>
+              </SubBox>
+            </ImgBox>
           </MainBox>
         ))}
-      <NavBar />
-    </>
+    </Main>
   );
 }
 
 export default MainListPage;
 
+const Main = styled.div`
+  width: 100%;
+  margin-left: 12px;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media ${(props) => props.theme.tablet} {
+    max-width: 1010px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media ${(props) => props.theme.laptop} {
+    max-width: 1920px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
 const MainBox = styled.div`
   width: 100%;
   height: 100%;
-  margin-bottom: 20px;
+  margin-left: 12px;
+  cursor: pointer;
 `;
 
 const MainImg = styled.img`
-  width: 100%;
+  width: 90%;
   height: 90%;
+  border-radius: 20px;
+`;
+
+const ImgBox = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const SubBox = styled.div`
@@ -72,7 +101,7 @@ const SubBox = styled.div`
 `;
 
 const InfoBox = styled.div`
-  width: 100%;
+  width: 90%;
   height: 100%;
 `;
 
