@@ -14,7 +14,7 @@ type NavAction = {
 
 // popular.json 타입 정의
 
-export interface VideoSnippet {
+interface VideoSnippet {
   categoryId: string;
   channelId: string;
   channelTitle: string;
@@ -58,26 +58,26 @@ export interface VideoSnippet {
   title: string;
 }
 
-export interface VideoItem {
+interface VideoItem {
   etag: string;
   id: string;
   kind: string;
   snippet: VideoSnippet;
 }
 
-export interface RelatedVideoItem {
+interface RelatedVideoItem {
   etag: string;
   id: RelatedId;
   kind: string;
   snippet: VideoSnippet;
 }
 
-export interface RelatedId {
+interface RelatedId {
   kind: string;
   videoId: string;
 }
 
-export interface VideoListResponse {
+interface VideoListResponse {
   etag: string;
   items: VideoItem[];
   kind: string;
@@ -88,7 +88,7 @@ export interface VideoListResponse {
   };
 }
 
-export interface ThumbnailImg {
+interface ThumbnailImg {
   $image?: string;
   $height?: number;
 }
