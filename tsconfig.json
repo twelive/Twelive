@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.paths.json",
+  "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -15,13 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    // 절대경로 설정
-    "baseUrl": ".",
-    "paths": {
-      "@/": ["src/*"]
-    }
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src"]
 }
