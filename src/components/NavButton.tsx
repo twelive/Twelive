@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 interface NavButtonProps {
@@ -7,10 +8,16 @@ interface NavButtonProps {
 }
 
 function NavButton({ src, title }: NavButtonProps) {
+  const dispatch = useDispatch();
+  const { navMenu } = useSelector((state: RootState) => state.navMenu);
+
   const handleNav = (e: React.MouseEvent<HTMLButtonElement>) => {
     const altText = (e.currentTarget.querySelector('img') as HTMLImageElement)
       ?.alt;
-    console.log(altText);
+
+    if (altText !== undefined && navMenu !== altText) {
+      dispatch({ type: 'click', payload: altText });
+    }
   };
 
   return (
