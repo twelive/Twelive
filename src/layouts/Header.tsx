@@ -7,8 +7,9 @@ import search from '../assets/common-search.svg';
 import login from '../assets/common-login.svg';
 import menu from '../assets/common-menu.svg';
 import mic from '../assets/common-mic.svg'
-import theme from '../../src/theme';
+import blacksun from '../assets/common-blacksun.svg';
 import HeaderButton from '../components/HeaderButton';
+import theme from '@/theme';
 
 
 
@@ -59,8 +60,8 @@ function Header(): ReactElement {
 
 
 
-  {isMobile &&  <div><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} imgClass='mobileImg' title="사용자 ">
-  </HeaderButton></div>}
+  {isMobile &&  <Div className='containerOption'><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} imgClass='mobileImg' title="사용자 ">
+  </HeaderButton> <HeaderButton buttonClass='darkmodeButton ' src={blacksun} title='다크모드' imgClass='darkMode'></HeaderButton></Div>}
 
   {(isLaptop || isDesktop) && ( <Div className='searchWrapper containerOption'>
     <Div className='searchContainer containerOption'><form id="form" name="form" action="" method="get">
@@ -82,12 +83,12 @@ function Header(): ReactElement {
 
 
 
-  {(isLaptop || isDesktop) && (<div>
+  {(isLaptop || isDesktop) && (<Div className='rightContainer'>
     <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span>로그인</span></Div>
    
     
   </HeaderButton>
-  </div>)}
+  </Div>)}
   
 
 
@@ -138,7 +139,6 @@ const Div = styled.div `
 &.searchContainer {
   
   justify-content: center;
-  min-width: 300px;
   right: 0;
   input {
     box-sizing: border-box;
@@ -148,10 +148,11 @@ const Div = styled.div `
     height: 35px;
     
     @media ${(props) => props.theme.tablet}{
-      width: 300px;
+      width: 350px;
     }
     @media ${(props) => props.theme.laptop}{
       width: 500px;
+
     }
     
 }
