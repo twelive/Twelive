@@ -7,6 +7,8 @@ import NavBar from './layouts/NavBar';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import MainListPage from '../src/pages/MainListPage';
+import Menubar from './layouts/MenuBar';
+
 function App() {
   return (
     <>
@@ -20,8 +22,8 @@ function App() {
             channelTitle={''}
             publishedAt={''}
           />
-          <NavBar />
-        </Provider>
+        <Menubar/>
+        <NavBar />
       </ThemeProvider>
     </>
   );
