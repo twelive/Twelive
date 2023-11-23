@@ -6,9 +6,13 @@ import styled from 'styled-components';
 function DetailPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
   const [detailData, useDetailData] = useState([]);
+  const { snippet } = data.items.find(
+    (i: VideoItem) => channelId === i.snippet.channelId
+  );
 
   const clickLink = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.parentElement) {
@@ -43,101 +47,137 @@ function DetailPage() {
   return (
     <>
       {detailData && (
-        <MainBox key={channelId}>
-          {detailData &&
-            detailData.map((item: Item) => (
-              <SubBox key={item.id.videoId}>
-                <SubImgBox onClick={clickLink}>
-                  <SubImg
-                    src={item.snippet.thumbnails.high.url}
-                    alt={item.snippet.title}
-                  />
-                </SubImgBox>
-                <SubTextBox onClick={clickLink}>
-                  <SubTitleText>{item.snippet.title} </SubTitleText>
-                  <SubTimeBox>
-                    <p>{item.snippet.channelTitle}</p>
-                    <p>{item.snippet.publishedAt.slice(0, 10)}</p>
-                  </SubTimeBox>
-                </SubTextBox>
-              </SubBox>
-            ))}
-        </MainBox>
+        <Box key={channelId}>
+          <MainBox>
+            <Video
+              controls
+              src={snippet.thumbnails.maxres.url}
+              poster={snippet.thumbnails.maxres.url}
+              title={snippet.title}
+            />
+            <VideoContent>
+              <h2>{snippet.title}</h2>
+              <dl>
+                <dt>채널명</dt>
+                <dd>{snippet.channelTitle}</dd>
+              </dl>
+              <ContentDetail>
+                <dl>
+                  <dt>날짜</dt>
+                  <dd>{snippet.publishedAt.slice(0, 10)}</dd>
+                  <dt>설명</dt>
+                  <dd>{snippet.description}</dd>
+                </dl>
+                {/* <button type="button">더보기</button> */}
+              </ContentDetail>
+            </VideoContent>
+          </MainBox>
+          <div>
+            {detailData &&
+              detailData.map((item: Item) => (
+                <SubBox key={item.id.videoId}>
+                  <SubImgBox onClick={clickLink}>
+                    <img
+                      src={item.snippet.thumbnails.high.url}
+                      alt={item.snippet.title}
+                    />
+                  </SubImgBox>
+                  <SubTextBox onClick={clickLink}>
+                    <SubTitleText>{item.snippet.title} </SubTitleText>
+                    <SubTimeBox>
+                      <p>{item.snippet.channelTitle}</p>
+                      <p>{item.snippet.publishedAt.slice(0, 10)}</p>
+                    </SubTimeBox>
+                  </SubTextBox>
+                </SubBox>
+              ))}
+          </div>
+        </Box>
       )}
     </>
   );
 }
 export default DetailPage;
 
+const Box = styled.div`
+  margin: 0 var(--primary-margin) 4.3125rem;
+
+  @media ${(props) => props.theme.laptop} {
+    display: flex;
+    gap: var(--primary-margin);
+    margin-bottom: var(--primary-margin);
+  }
+`;
+
 const MainBox = styled.div`
-  margin: 0 0 4.3125rem 1.25rem;
+  @media ${(props) => props.theme.laptop} {
+    width: 100%;
+  }
 `;
 
-/* const MainImgBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MainImg = styled.img`
+const Video = styled.video`
   width: 100%;
-  height: 90%;
-  border-radius: 20px;
+  margin-top: var(--primary-margin);
+  border-radius: 0.625rem;
 `;
 
-const MainTextBox = styled.div`
-  width: 100%;
-  margin-left: 20px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+const VideoContent = styled.div`
+  margin: 0.625rem 0 1.5rem 0;
+
+  h2 {
+    margin-bottom: 0.625rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  dt {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0); /* IE 6,7 */
+    clip: rect(0, 0, 0, 0);
+    width: 0.0625rem;
+    height: 0.0625rem;
+    margin: -0.0625rem;
+    border: 0;
+    padding: 0;
+  }
+
+  dd {
+    font-size: 0.875rem;
+  }
 `;
 
-const MainTitleText = styled.p`
-  color: black;
-  font-size: 25px;
-  font-weight: 500;
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-break: keep-all;
-  margin-bottom: 8px;
-`;
+const ContentDetail = styled.dl`
+  margin-top: 0.625rem;
+  padding: 0.625rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 0.625rem;
+  font-size: var(--font-small);
+  line-height: var(--primary-margin);
 
-const MainChannelTitle = styled.p`
-  color: black;
-  opacity: 70%;
-  font-size: 20px;
+  dd {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 `;
-
-const MainCommentBox = styled.div`
-  width: 100%;
-  // 추후 여기다가 스타일링해서 작성하면 될듯합니다.
-`;
-
-const MainCommentText = styled.p`
-  font-size: 13px;
-  // 추후 여기다가 스타일링해서 작성하면 될듯합니다.
-`; */
 
 const SubBox = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-top: 20px;
+  margin-top: var(--primary-margin);
 `;
 
 const SubImgBox = styled.div`
   cursor: pointer;
-`;
 
-const SubImg = styled.img`
-  width: 10.5rem;
-  height: 5.875rem;
-  object-fit: cover;
-  border-radius: 0.625rem;
+  img {
+    width: 10.5rem;
+    height: 5.875rem;
+    object-fit: cover;
+    border-radius: 0.625rem;
+  }
 `;
 
 const SubTextBox = styled.div`
