@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function DetailPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
   const [detailData, useDetailData] = useState([]);
+
+  const clickLink = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.currentTarget.parentElement) {
+      const clickedIndex = Array.from(
+        e.currentTarget.parentElement.children
+      ).indexOf(e.currentTarget);
+
+      if (data.items && data.items[clickedIndex]) {
+        const clickedItem = data.items[clickedIndex];
+        const currentChannelId = clickedItem.snippet.channelId;
+        dispatch({ type: 'updateChannelId', update: currentChannelId });
+        navigate(`/detail/${currentChannelId}`);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +47,13 @@ function DetailPage() {
           {detailData &&
             detailData.map((item: Item) => (
               <SubBox key={item.id.videoId}>
-                <SubImgBox>
+                <SubImgBox onClick={clickLink}>
                   <SubImg
                     src={item.snippet.thumbnails.high.url}
                     alt={item.snippet.title}
                   />
                 </SubImgBox>
-                <SubTextBox>
+                <SubTextBox onClick={clickLink}>
                   <SubTitleText>{item.snippet.title} </SubTitleText>
                   <SubTimeBox>
                     <p>{item.snippet.channelTitle}</p>
