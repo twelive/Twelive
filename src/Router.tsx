@@ -11,7 +11,7 @@ const Router = () => {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<MainListPage />} />
-          <Route path="/detail/:indexId" element={<DetailPage />} />
+          <Route path="/detail/:detailId" element={<DetailPage />} />
           <Route path="*" element={<Error404Page />} />
         </Route>
       </Routes>
