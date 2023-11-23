@@ -8,7 +8,7 @@ interface ListItem {
   url: string;
 }
 
-function MainListPage({ title, channelTitle, publishedAt, url }: ListItem) {
+function MainListPage() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
