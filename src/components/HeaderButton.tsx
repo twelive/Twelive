@@ -17,7 +17,7 @@ function HeaderButton ({ src, title, buttonClass,children, imgClass, onClick }: 
 
   return (
     <Button type="button" className={buttonClass}>
-      <Img src={src} className={imgClass} onClick={onClick}  alt={title} />
+      <Img src={src} className={imgClass}  alt={title} onClick={onClick} />
       {children}
     </Button>
   );

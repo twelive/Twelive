@@ -6,10 +6,21 @@ interface NavState {
   navMenu: string;
 }
 
+interface ToggleState {
+  toggleMenu: boolean;
+}
+
+
 // 액션 타입 정의
 type NavAction = {
   type: 'click';
   payload?: string;
+};
+
+// 액션 타입 정의
+type ToggleAction = {
+  type: 'click';
+  value? : boolean;
 };
 
 // popular.json 타입 정의
