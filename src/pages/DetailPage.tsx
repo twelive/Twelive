@@ -168,7 +168,24 @@ const ContentDetail = styled.dl`
 const ScrollBox = styled.div`
   @media ${(props) => props.theme.laptop} {
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+
+    &::-webkit-scrollbar {
+      width: 0.625rem; /* 필수값 */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--button-hover-color);
+      border-radius: var(--primary-margin);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(4, 90, 220, 0.1);
+      border-radius: var(--primary-margin);
+      margin-top: 0.625rem;
+    }
   }
 `;
 
@@ -226,7 +243,7 @@ const SubTitleText = styled.p`
   overflow: hidden;
   display: -webkit-box;
   font-weight: 600;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
 
