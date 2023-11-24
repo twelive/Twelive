@@ -5,13 +5,13 @@ import MainListPage from './pages/MainListPage';
 import DetailPage from './pages/DetailPage';
 import Error404Page from './pages/Error404Page';
 
-const Router: React.FC = () => {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<MainListPage />} />
-          <Route path="/detail/:indexId" element={<DetailPage />} />
+          <Route path="/detail/:detailId" element={<DetailPage />} />
           <Route path="*" element={<Error404Page />} />
         </Route>
       </Routes>

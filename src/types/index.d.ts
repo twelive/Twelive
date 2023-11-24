@@ -1,30 +1,4 @@
-// Reducer
-type RootState = ReturnType<typeof rootReducer>;
-
-// 상태의 타입 정의
-interface NavState {
-  navMenu: string;
-}
-
-interface ToggleState {
-  toggleMenu: boolean;
-}
-
-
-// 액션 타입 정의
-type NavAction = {
-  type: 'click';
-  payload?: string;
-};
-
-// 액션 타입 정의
-type ToggleAction = {
-  type: 'click';
-  value? : boolean;
-};
-
 // popular.json 타입 정의
-
 interface VideoSnippet {
   categoryId: string;
   channelId: string;
@@ -102,4 +76,52 @@ interface VideoListResponse {
 interface ThumbnailImg {
   $image?: string;
   $height?: number;
+}
+
+// detail.json 타입 정의
+interface Thumbnail {
+  url: string;
+  width: number;
+  height: number;
+}
+
+interface Snippet {
+  publishedAt: string;
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnails: {
+    default: Thumbnail;
+    medium: Thumbnail;
+    high: Thumbnail;
+  };
+  channelTitle: string;
+  liveBroadcastContent: string;
+  publishTime: string;
+}
+
+interface VideoId {
+  kind: string;
+  videoId: string;
+}
+
+interface Item {
+  kind: string;
+  etag: string;
+  id: VideoId;
+  snippet: Snippet;
+}
+
+interface PageInfo {
+  totalResults: number;
+  resultsPerPage: number;
+}
+
+interface SearchResult {
+  kind: string;
+  etag: string;
+  nextPageToken: string;
+  regionCode: string;
+  pageInfo: PageInfo;
+  items: Item[];
 }

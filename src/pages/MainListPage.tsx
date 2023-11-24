@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 interface ListItem {
@@ -9,14 +11,16 @@ interface ListItem {
 }
 
 function MainListPage() {
-  const [data, setData] = useState<any>(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data } = useSelector((state: RootState) => state.data);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/videos/popular.json');
         const list = await response.json();
-        setData(list);
+        dispatch({ type: 'fetch', payload: list });
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -24,14 +28,26 @@ function MainListPage() {
     fetchData();
   }, []);
 
-  const MainClick = () => {
-    console.log(123);
+  const MainClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.currentTarget.parentElement) {
+      const clickedIndex = Array.from(
+        e.currentTarget.parentElement.children
+      ).indexOf(e.currentTarget);
+
+      if (data.items && data.items[clickedIndex]) {
+        const clickedItem = data.items[clickedIndex];
+        const currentChannelId = clickedItem.snippet.channelId;
+        const currentTitle = clickedItem.snippet.title;
+        dispatch({ type: 'updateChannelId', update: currentChannelId });
+        navigate(`/detail/${currentChannelId}`);
+      }
+    }
   };
 
   return (
     <Main>
-      {data &&
-        data.items.map((item: any, index: number) => (
+      {data.items &&
+        data.items.map((item: VideoItem, index: number) => (
           <MainBox key={index} onClick={MainClick}>
             <ImgBox>
               <MainImg
