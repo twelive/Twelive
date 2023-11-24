@@ -47,9 +47,12 @@ cursor: pointer;
 }
 &.darkmodeButton {
   margin-top: 3px;
+  margin-right: 0.75rem;
+
   height: 2.1875rem;
   width: 2.1875rem;
   border-radius: 100%;
+
   &:hover {
 
     background-color: var(--button-hover-color);
@@ -91,6 +94,8 @@ width: 3.4375rem;
 
 &.homeButton {
   height: 3.125rem;
+margin-left: 0.75rem;
+  
   }
 
   
@@ -103,6 +108,8 @@ width: 3.4375rem;
   
   &.loginButton {
     height: 2.125rem;
+margin-right: 0.75rem;
+    
   }
 
   &.micButton {
@@ -151,6 +158,7 @@ const Img = styled.img`
 &.darkMode {
   width: 22px;
   height: 22px;
+
 }
 `;
 

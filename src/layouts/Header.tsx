@@ -93,11 +93,11 @@ function Header(): ReactElement {
 
 
 
-  {(isLaptop || isDesktop) && (<Div className='rightContainer'>
-    <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span>로그인</span></Div>
+  {(isLaptop || isDesktop) && (<Div className='rightContainer containerOption'>
+    <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span>로그인</span> </Div>
    
     
-  </HeaderButton>
+  </HeaderButton><HeaderButton buttonClass='darkmodeButton ' src={blacksun} title='다크모드' imgClass='darkMode'></HeaderButton>
   </Div>)}
   
 
@@ -117,9 +117,9 @@ export default Header;
 
 const HeadBar = styled.header `
 
-padding-left: 0.75rem;
-padding-right: 0.75rem;
-
+background-color: white;
+position: fixed;
+width: 100%;
 height: 3rem;
 box-shadow: 1px 1px 4px 0px #D4D4D4;
 
