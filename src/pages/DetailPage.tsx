@@ -72,7 +72,7 @@ function DetailPage() {
               </ContentDetail>
             </VideoContent>
           </MainBox>
-          <div>
+          <ScrollBox>
             {detailData &&
               detailData.map((item: Item) => (
                 <SubBox key={item.id.videoId}>
@@ -93,7 +93,7 @@ function DetailPage() {
                   </SubTextBox>
                 </SubBox>
               ))}
-          </div>
+          </ScrollBox>
         </Box>
       )}
     </>
@@ -165,6 +165,13 @@ const ContentDetail = styled.dl`
   }
 `;
 
+const ScrollBox = styled.div`
+  @media ${(props) => props.theme.laptop} {
+    height: 100vh;
+    overflow-y: auto;
+  }
+`;
+
 const SubBox = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -216,14 +223,11 @@ const SubTextBox = styled.div`
 `;
 
 const SubTitleText = styled.p`
+  overflow: hidden;
+  display: -webkit-box;
   font-weight: 600;
-
-  @media ${(props) => props.theme.mobile} {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const SubTimeBox = styled.div`
