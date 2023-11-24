@@ -86,7 +86,9 @@ function DetailPage() {
                     <SubTitleText>{item.snippet.title} </SubTitleText>
                     <SubTimeBox>
                       <p>{item.snippet.channelTitle}</p>
-                      <p>{item.snippet.publishedAt.slice(0, 10)}</p>
+                      <TimeContent>
+                        {item.snippet.publishedAt.slice(0, 10)}
+                      </TimeContent>
                     </SubTimeBox>
                   </SubTextBox>
                 </SubBox>
@@ -167,6 +169,11 @@ const SubBox = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-top: var(--primary-margin);
+
+  @media ${(props) => props.theme.mobile} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const SubImgBox = styled.div`
@@ -177,6 +184,24 @@ const SubImgBox = styled.div`
     height: 5.875rem;
     object-fit: cover;
     border-radius: 0.625rem;
+
+    @media ${(props) => props.theme.mobile} {
+      width: 100%;
+      height: 20vh;
+      object-fit: unset;
+
+      @media (min-width: 26.875rem) {
+        height: 25vh;
+      }
+
+      @media (min-width: 28.75rem) {
+        height: 30vh;
+      }
+
+      @media (min-width: 35rem) {
+        height: 40vh;
+      }
+    }
   }
 `;
 
@@ -192,10 +217,23 @@ const SubTextBox = styled.div`
 
 const SubTitleText = styled.p`
   font-weight: 600;
+
+  @media ${(props) => props.theme.mobile} {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 const SubTimeBox = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 0.875rem;
+`;
+
+const TimeContent = styled.p`
+  @media ${(props) => props.theme.mobile} {
+    display: none;
+  }
 `;
