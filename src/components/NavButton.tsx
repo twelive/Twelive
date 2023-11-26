@@ -16,7 +16,7 @@ function NavButton({ src, title }: NavButtonProps) {
       ?.alt;
 
     if (altText !== undefined && navMenu !== altText) {
-      dispatch({ type: 'click', payload: altText });
+      dispatch({ type: 'NAV_CLICK', payload: altText });
     }
   };
 
@@ -39,5 +39,7 @@ const Button = styled.button`
   height: 3rem;
   border: none;
   background-color: transparent;
+color: var(--darkmode-color);
+  
   cursor: pointer;
 `;

@@ -125,11 +125,14 @@ const Video = styled.video`
 
 const VideoContent = styled.div`
   margin: 0.625rem 0 1.5rem 0;
+  color: var(--darkmode-color);
 
   h2 {
     margin-bottom: 0.625rem;
     font-size: 1.125rem;
     font-weight: 600;
+  
+
   }
 
   dt {
@@ -237,6 +240,8 @@ const SubTextBox = styled.div`
   gap: 0.5rem;
   opacity: 70%;
   cursor: pointer;
+  color: var(--darkmode-color);
+
 `;
 
 const SubTitleText = styled.p`
@@ -245,16 +250,21 @@ const SubTitleText = styled.p`
   font-weight: 600;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--darkmode-color);
 `;
 
 const SubTimeBox = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 0.875rem;
+  color: var(--darkmode-color);
+
 `;
 
 const TimeContent = styled.p`
   @media ${(props) => props.theme.mobile} {
     display: none;
+  color: var(--darkmode-color);
+
   }
 `;
