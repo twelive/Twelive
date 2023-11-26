@@ -4,7 +4,10 @@ const GlobalStyles = createGlobalStyle`
 /* Font 설정 */
 html, body, #root {
   font-family: 'SUITE', 'SUITE Variable', sans-serif;
+  background-color: ${(props) => props.theme.bgColor};
+
 }
+
 /* reset CSS */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -33,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+
 }
 ol, ul {
 	list-style: none;
@@ -60,6 +64,8 @@ table {
         --font-reqular: 1rem;
         --font-small: 0.8rem;
         --primary-margin: 1.25rem;
+				--darkmode-color: ${(props) => props.theme.color};
+				--darkmode-bgColor: ${(props) => props.theme.bgColor};
     }
 
 `;

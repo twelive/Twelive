@@ -18,6 +18,11 @@ interface DetailState {
   channelId: string;
 }
 
+interface ThemeState {
+  darkMode: boolean;
+}
+
+
 // 액션 타입 정의
 type NavAction = {
   type: 'click';
@@ -40,3 +45,7 @@ interface DetailAction {
   type: `updateChannelId`;
   update: stiring;
 }
+
+type ThemeAction = {
+  type: 'TOGGLE_THEME';
+};

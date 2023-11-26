@@ -1,14 +1,8 @@
+import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-
-interface ListItem {
-  title: string;
-  channelTitle: string;
-  publishedAt: string;
-  url: string;
-}
 
 function MainListPage() {
   const navigate = useNavigate();
@@ -37,7 +31,6 @@ function MainListPage() {
       if (data.items && data.items[clickedIndex]) {
         const clickedItem = data.items[clickedIndex];
         const currentChannelId = clickedItem.snippet.channelId;
-        const currentTitle = clickedItem.snippet.title;
         dispatch({ type: 'updateChannelId', update: currentChannelId });
         navigate(`/detail/${currentChannelId}`);
       }
@@ -48,23 +41,33 @@ function MainListPage() {
     <Main>
       {data.items &&
         data.items.map((item: VideoItem, index: number) => (
-          <MainBox key={index} onClick={MainClick}>
-            <ImgBox>
-              <MainImg
-                src={item.snippet.thumbnails.maxres.url}
-                alt={item.snippet.title}
-              />
-              <SubBox>
-                <InfoBox>
-                  <TitleTxt>{item.snippet.title}</TitleTxt>
-                  <SubTxt>
-                    {item.snippet.channelTitle}﹒
-                    {item.snippet.publishedAt.slice(0, 10)}
-                  </SubTxt>
-                </InfoBox>
-              </SubBox>
-            </ImgBox>
-          </MainBox>
+          <motion.div
+            whileHover={{ backgroundColor: 'var(--darkmode-bgColor)', scale: 1.1, color: 'var(--darkmode-color)'}}
+            key={index}
+            style={{
+              backgroundColor: 'transparent',
+              transition: 'background-color 0.2s ease-in-out', color: 'var(--darkmode-color)'
+            }}
+            onClick={MainClick}
+          >
+            <MainBox key={index} onClick={MainClick}>
+              <ImgBox>
+                <MainImg
+                  src={item.snippet.thumbnails.maxres.url}
+                  alt={item.snippet.title}
+                />
+                <SubBox>
+                  <InfoBox>
+                    <TitleTxt>{item.snippet.title}</TitleTxt>
+                    <SubTxt>
+                      {item.snippet.channelTitle}﹒
+                      {item.snippet.publishedAt.slice(0, 10)}
+                    </SubTxt>
+                  </InfoBox>
+                </SubBox>
+              </ImgBox>
+            </MainBox>
+          </motion.div>
         ))}
     </Main>
   );
@@ -79,6 +82,8 @@ const Main = styled.div`
   gap: 20px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+
+  
 
   @media ${(props) => props.theme.tablet} {
     max-width: 1010px;
@@ -123,7 +128,7 @@ const InfoBox = styled.div`
 `;
 
 const TitleTxt = styled.p`
-  color: black;
+  color: var(--darkmode-color);
   font-size: 18px;
   font-weight: 500;
   overflow: hidden;
@@ -137,7 +142,7 @@ const TitleTxt = styled.p`
 `;
 
 const SubTxt = styled.p`
-  color: black;
+  color: var(--darkmode-color);
   opacity: 70%;
   font-size: 14px;
 `;

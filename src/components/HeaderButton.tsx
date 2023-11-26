@@ -47,12 +47,15 @@ cursor: pointer;
 }
 &.darkmodeButton {
   margin-top: 3px;
+  margin-right: 0.75rem;
+
   height: 2.1875rem;
   width: 2.1875rem;
   border-radius: 100%;
+
   &:hover {
 
-    background-color: var(--button-hover-color);
+    background-color: ${(props) => props.theme.hoverColor};
   }
 }
 &.roundedOption {
@@ -63,7 +66,8 @@ cursor: pointer;
     padding-right: 0.625rem;
     &:hover {
       border: 0.05rem solid var(--primary-color);
-      background-color: var(--button-hover-color)
+      background-color: ${(props) => props.theme.hoverColor};
+
     }
 }
 &.searchOption {
@@ -91,6 +95,8 @@ width: 3.4375rem;
 
 &.homeButton {
   height: 3.125rem;
+margin-left: 0.75rem;
+  
   }
 
   
@@ -103,6 +109,8 @@ width: 3.4375rem;
   
   &.loginButton {
     height: 2.125rem;
+margin-right: 0.75rem;
+    
   }
 
   &.micButton {
@@ -110,7 +118,8 @@ width: 3.4375rem;
    height: 2.1875rem;
    margin-left: 0.625rem;
    &:hover {
-    background-color: var(--button-hover-color);
+    background-color: ${(props) => props.theme.hoverColor};
+
 
    }
   }
@@ -135,7 +144,8 @@ const Img = styled.img`
     margin-right: 15px;
     &:hover {
       
-      background-color: var(--button-hover-color);
+      background-color: ${(props) => props.theme.hoverColor};
+
     }  
 }
 
@@ -151,6 +161,7 @@ const Img = styled.img`
 &.darkMode {
   width: 22px;
   height: 22px;
+
 }
 `;
 
