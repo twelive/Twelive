@@ -3,21 +3,43 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import NavButton from '../components/NavButton';
 import commonHome from '../assets/common-home.svg';
+import commonwhiteHome from '../assets/common-whitehome.svg';
 import commonHomeClick from '../assets/common-home-click.svg';
 import commonShorts from '../assets/common-shorts.svg';
+import commonwhiteShorts from '../assets/common-whiteshorts.svg';
+import commonShortsClick from '../assets/common-shorts-click.svg';
 import commonSubscribe from '../assets/common-subscribe.svg';
+import commonwhiteSubscribe from '../assets/common-whitesubscribe.svg';
 import commonSubscribeClick from '../assets/common-subscribe-click.svg';
 import commonMe from '../assets/common-me.svg';
+import commonwhiteMe from '../assets/common-whiteme.svg';
 import commonMeClick from '../assets/common-me-click.svg';
 
 function NavBar() {
   const { navMenu } = useSelector((state: RootState) => state.navMenu);
+  const darkMode = useSelector((state: RootState) => state.darkMode.darkMode); // 다크모드 상태를 가져옵니다.
 
   const menuItems = [
-    { title: '홈', normal: commonHome, clicked: commonHomeClick },
-    { title: 'Shorts', normal: commonShorts, clicked: commonShorts }, // 여기는 clicked 이미지가 없어서 같은 이미지로 대체
-    { title: '구독', normal: commonSubscribe, clicked: commonSubscribeClick },
-    { title: '보관함', normal: commonMe, clicked: commonMeClick },
+    { 
+      title: '홈', 
+      normal: darkMode ? commonwhiteHome : commonHome, 
+      clicked: commonHomeClick 
+    },
+    { 
+      title: 'Shorts', 
+      normal: darkMode ? commonwhiteShorts : commonShorts, 
+      clicked: commonShortsClick 
+    },
+    { 
+      title: '구독', 
+      normal: darkMode ? commonwhiteSubscribe : commonSubscribe, 
+      clicked: commonSubscribeClick 
+    },
+    { 
+      title: '보관함', 
+      normal: darkMode ? commonwhiteMe : commonMe, 
+      clicked: commonMeClick 
+    },
   ];
 
   return (
@@ -42,7 +64,8 @@ const NavBox = styled.nav`
   height: 3.0625rem;
   position: fixed;
   bottom: 0rem;
-  background-color: white;
+  background-color: ${(props) => props.theme.bgColor};
+
 
   @media ${(props) => props.theme.laptop} {
     display: none;
