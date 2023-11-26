@@ -42,11 +42,11 @@ function MainListPage() {
       {data.items &&
         data.items.map((item: VideoItem, index: number) => (
           <motion.div
-            whileHover={{ backgroundColor: 'white', scale: 1.1 }}
+            whileHover={{ backgroundColor: 'var(--darkmode-bgColor)', scale: 1.1, color: 'var(--darkmode-color)'}}
             key={index}
             style={{
               backgroundColor: 'transparent',
-              transition: 'background-color 0.2s ease-in-out',
+              transition: 'background-color 0.2s ease-in-out', color: 'var(--darkmode-color)'
             }}
             onClick={MainClick}
           >
@@ -82,6 +82,8 @@ const Main = styled.div`
   gap: 20px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+
+  
 
   @media ${(props) => props.theme.tablet} {
     max-width: 1010px;
@@ -126,7 +128,7 @@ const InfoBox = styled.div`
 `;
 
 const TitleTxt = styled.p`
-  color: black;
+  color: var(--darkmode-color);
   font-size: 18px;
   font-weight: 500;
   overflow: hidden;
@@ -140,7 +142,7 @@ const TitleTxt = styled.p`
 `;
 
 const SubTxt = styled.p`
-  color: black;
+  color: var(--darkmode-color);
   opacity: 70%;
   font-size: 14px;
 `;
