@@ -43,7 +43,7 @@ function Header(): ReactElement {
   })
 
   const handleToggle = () => {
-    dispatch({ type: 'click', value: toggleMenu });
+    dispatch({ type: 'TOGGLE_CLICK', value: toggleMenu });
   };
  
 
