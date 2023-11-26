@@ -4,14 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import styled, { ThemeProvider } from "styled-components";
 import mainlogo from '../assets/common-logo.svg';
+import whitemainlogo from '../assets/common-whitemainlogo.svg';
 import search from '../assets/common-search.svg';
+import whitesearch from '../assets/common-whitesearch.svg';
 import login from '../assets/common-login.svg';
+import whitelogin from '../assets/common-whitelogin.svg';
 import menu from '../assets/common-menu.svg';
+import whitemenu from '../assets/common-whitemenu.svg';
 import mic from '../assets/common-mic.svg'
+import whitemic from '../assets/common-whitemic.svg';
 import blacksun from '../assets/common-blacksun.svg';
+import whitemoon from '../assets/common-whitemoon.svg';
 import HeaderButton from '../components/HeaderButton';
 import MenuBar from '../layouts/MenuBar';
 import theme from '@/theme';
+import store from '@/store/store';
+import { Provider } from 'react-redux';
 
 
 
@@ -45,21 +53,49 @@ function Header(): ReactElement {
   const handleToggle = () => {
     dispatch({ type: 'click', value: toggleMenu });
   };
+
+  const images = {
+    darkMode: {
+      login: whitelogin,
+      darkModeButton: whitemoon,
+      logo: whitemainlogo,
+      mic: whitemic,
+      menu: whitemenu,
+      search: whitesearch,
+   
+    },
+    lightMode: {
+      login: login,
+      darkModeButton: blacksun,
+      logo: mainlogo,
+      mic: mic,
+      menu: menu,
+      search: search,
+    },
+  };
+  
+
  
+  const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
+
+  const currentImages = darkMode ? images.darkMode : images.lightMode;
+
+  const handleDarkModeToggle = () => {
+    dispatch({ type: 'TOGGLE_THEME' });
+  };
 
   return (  <>
-  
   <HeadBar>
 
     <Div className='buttonContainer containerOption'>
-      {isMobile && <HeaderButton buttonClass="homeButton" src={mainlogo} imgClass='homelogo' title="트웰브 홈으로">
+      {isMobile && <HeaderButton buttonClass="homeButton" src={currentImages.logo} imgClass='homelogo' title="트웰브 홈으로">
 
   </HeaderButton>}
   {(isLaptop || isDesktop) && (<Div className ='leftContainer containerOption'> 
-   <HeaderButton buttonClass='hamburgerButton arrayOption'  imgClass="hamburger" src={menu} title="상세 메뉴" onClick={handleToggle}
+   <HeaderButton buttonClass='hamburgerButton arrayOption'  imgClass="hamburger" src={currentImages.menu} title="상세 메뉴"  onClick={handleToggle}
 >
 
-</HeaderButton> <HeaderButton buttonClass="homeButton" imgClass='homelogo' src={mainlogo} title="트웰브 홈으로">
+</HeaderButton> <HeaderButton buttonClass="homeButton" imgClass='homelogo' src={currentImages.logo} title="트웰브 홈으로">
 
 </HeaderButton> </Div>)}
   
@@ -70,8 +106,8 @@ function Header(): ReactElement {
 
 
 
-  {isMobile &&  <Div className='containerOption'><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={login} imgClass='mobileImg' title="사용자 ">
-  </HeaderButton> <HeaderButton buttonClass='darkmodeButton ' src={blacksun} title='다크모드' imgClass='darkMode'></HeaderButton></Div>}
+  {isMobile &&  <Div className='containerOption'><HeaderButton buttonClass="searchButton" imgClass='mobileImg'  src={currentImages.search} title="검색버튼"> </HeaderButton> <HeaderButton buttonClass="loginButton" src={currentImages.login} imgClass='mobileImg' title="사용자 ">
+  </HeaderButton> <HeaderButton buttonClass='darkmodeButton ' src={currentImages.darkModeButton} title='다크모드' imgClass='darkMode' onClick={handleDarkModeToggle}></HeaderButton></Div>}
 
   {(isLaptop || isDesktop) && ( <Div className='searchWrapper containerOption'>
     <Div className='searchContainer containerOption'><form id="form" name="form" action="" method="get">
@@ -83,7 +119,7 @@ function Header(): ReactElement {
 </form>
 <HeaderButton buttonClass='searchButton searchOption' src={search} title='영상검색' ></HeaderButton>
 
-      </Div> <HeaderButton buttonClass='micButton' src={mic} title='음성검색' ></HeaderButton>
+      </Div> <HeaderButton buttonClass='micButton' src={currentImages.mic} title='음성검색' ></HeaderButton>
   </Div>)}
   
 
@@ -93,11 +129,11 @@ function Header(): ReactElement {
 
 
 
-  {(isLaptop || isDesktop) && (<Div className='rightContainer'>
-    <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span>로그인</span></Div>
+  {(isLaptop || isDesktop) && (<Div className='rightContainer containerOption'>
+    <HeaderButton buttonClass="loginButton arrayOption roundedOption" src={currentImages.login} imgClass='loginImg' title="사용자"><Div className='login containerOption'><span className='loginText'>로그인</span> </Div>
    
     
-  </HeaderButton>
+  </HeaderButton><HeaderButton buttonClass='darkmodeButton ' src={currentImages.darkModeButton} title='다크모드' imgClass='darkMode' onClick={handleDarkModeToggle}></HeaderButton>
   </Div>)}
   
 
@@ -106,7 +142,6 @@ function Header(): ReactElement {
 
     </Div>
   </HeadBar>
-  
   
   </> 
   );
@@ -117,9 +152,11 @@ export default Header;
 
 const HeadBar = styled.header `
 
-padding-left: 0.75rem;
-padding-right: 0.75rem;
+background-color: ${(props) => props.theme.bgColor};
 
+
+position: fixed;
+width: 100%;
 height: 3rem;
 box-shadow: 1px 1px 4px 0px #D4D4D4;
 
@@ -177,10 +214,17 @@ const Div = styled.div `
   
   
 }
+&.loginText {
+  
 
+
+}
 &.login {
 
   justify-content: center;
+color: var(--darkmode-color);
+
+
 }
 
 `;
