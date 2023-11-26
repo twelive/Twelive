@@ -55,7 +55,7 @@ cursor: pointer;
 
   &:hover {
 
-    background-color: var(--button-hover-color);
+    background-color: ${(props) => props.theme.hoverColor};
   }
 }
 &.roundedOption {
@@ -66,7 +66,8 @@ cursor: pointer;
     padding-right: 0.625rem;
     &:hover {
       border: 0.05rem solid var(--primary-color);
-      background-color: var(--button-hover-color)
+      background-color: ${(props) => props.theme.hoverColor};
+
     }
 }
 &.searchOption {
@@ -117,7 +118,8 @@ margin-right: 0.75rem;
    height: 2.1875rem;
    margin-left: 0.625rem;
    &:hover {
-    background-color: var(--button-hover-color);
+    background-color: ${(props) => props.theme.hoverColor};
+
 
    }
   }
@@ -142,7 +144,8 @@ const Img = styled.img`
     margin-right: 15px;
     &:hover {
       
-      background-color: var(--button-hover-color);
+      background-color: ${(props) => props.theme.hoverColor};
+
     }  
 }
 
