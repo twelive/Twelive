@@ -30,7 +30,7 @@ type NavAction = {
 };
 
 type ToggleAction = {
-  type: 'click';
+  type: 'toggle';
   value?: boolean;
 };
 

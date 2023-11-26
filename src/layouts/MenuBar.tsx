@@ -2,10 +2,9 @@ import React, { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from "styled-components";
 import menu from '../assets/common-menu.svg';
-import home from '../assets/common-home.svg';
 import shorts from '../assets/common-shorts.svg';
 import subscribe from '../assets/common-subscribe.svg';
-import me from '../assets/common-me.svg';
+import playlist from '../assets/common-playlist.svg';
 import history from '../assets/common-history.svg';
 import rank from '../assets/common-rank.svg';
 import shopping from '../assets/common-shopping.svg';
@@ -28,7 +27,7 @@ function MenuBar(): ReactElement {
   const [activeButton, setActiveButton] = useState('');
 
   const handleToggle = () => {
-    dispatch({ type: 'click', value: toggleMenu });
+    dispatch({ type: 'TOGGLE_CLICK', value: toggleMenu });
   };
 
   const handleButtonClick = (buttonName: string) => {
@@ -36,10 +35,9 @@ function MenuBar(): ReactElement {
   };
 
   const menuItems = [
-    { name: 'home', icon: home, label: 'Home' },
     { name: 'shorts', icon: shorts, label: 'Shorts' },
     { name: 'subscribe', icon: subscribe, label: 'Subscribe' },
-    { name: 'me', icon: me, label: 'Me' },
+    { name: 'playlist', icon: playlist, label: 'Playlist' },
     { name: 'history', icon: history, label: 'History' },
     { name: 'rank', icon: rank, label: 'Rank' },
     { name: 'shopping', icon: shopping, label: 'Shopping' },
@@ -54,7 +52,7 @@ function MenuBar(): ReactElement {
 
   return (
     <>
-      {toggleMenu && <Backdrop />}
+      {toggleMenu && <Backdrop onClick={handleToggle}/>}
       <VisibleMenu isActive={toggleMenu}>
         <Div>
           <Button className='activeTotalLogo'>
@@ -83,12 +81,6 @@ function MenuBar(): ReactElement {
 }
 
 export default MenuBar;
-
-const MenuBarContainer = styled.div`
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  height: 2rem;
-`;
 
 const Div = styled.div`
   padding-left: 0.75rem;
@@ -169,7 +161,6 @@ const VisibleMenu = styled.div<VisibleMenuProps>`
   background-color: #fff; 
   backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
   z-index: 999; 
-  overflow-y: scroll;
 `;
 
 const Backdrop = styled.div`
@@ -178,6 +169,6 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.3); 
+  background-color: rgba(0, 0, 0, 0.7); 
   z-index: 998; 
 `;

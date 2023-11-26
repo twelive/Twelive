@@ -16,7 +16,7 @@ function NavButton({ src, title }: NavButtonProps) {
       ?.alt;
 
     if (altText !== undefined && navMenu !== altText) {
-      dispatch({ type: 'click', payload: altText });
+      dispatch({ type: 'NAV_CLICK', payload: altText });
     }
   };
 

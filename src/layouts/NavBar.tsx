@@ -11,7 +11,7 @@ import commonShortsClick from '../assets/common-shorts-click.svg';
 import commonSubscribe from '../assets/common-subscribe.svg';
 import commonwhiteSubscribe from '../assets/common-whitesubscribe.svg';
 import commonSubscribeClick from '../assets/common-subscribe-click.svg';
-import commonMe from '../assets/common-me.svg';
+import commonPlaylist from '../assets/common-playlist.svg';
 import commonwhiteMe from '../assets/common-whiteme.svg';
 import commonMeClick from '../assets/common-me-click.svg';
 
@@ -37,7 +37,7 @@ function NavBar() {
     },
     { 
       title: '보관함', 
-      normal: darkMode ? commonwhiteMe : commonMe, 
+      normal: darkMode ? commonwhiteMe : commonPlaylist, 
       clicked: commonMeClick 
     },
   ];
