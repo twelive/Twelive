@@ -7,7 +7,7 @@ import commonHomeClick from '../assets/common-home-click.svg';
 import commonShorts from '../assets/common-shorts.svg';
 import commonSubscribe from '../assets/common-subscribe.svg';
 import commonSubscribeClick from '../assets/common-subscribe-click.svg';
-import commonMe from '../assets/common-me.svg';
+import commonPlaylist from '../assets/common-playlist.svg';
 import commonMeClick from '../assets/common-me-click.svg';
 
 function NavBar() {
@@ -17,7 +17,7 @@ function NavBar() {
     { title: '홈', normal: commonHome, clicked: commonHomeClick },
     { title: 'Shorts', normal: commonShorts, clicked: commonShorts }, // 여기는 clicked 이미지가 없어서 같은 이미지로 대체
     { title: '구독', normal: commonSubscribe, clicked: commonSubscribeClick },
-    { title: '보관함', normal: commonMe, clicked: commonMeClick },
+    { title: '보관함', normal: commonPlaylist, clicked: commonMeClick },
   ];
 
   return (
