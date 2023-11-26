@@ -1,13 +1,17 @@
+type ToggleAction =
+  | { type: 'TOGGLE_CLICK' }
+
+
 const initialState: ToggleState = {
   toggleMenu: false,
 };
 
 function toggleReducer(state: ToggleState = initialState, action: ToggleAction) {
   switch (action.type) {
-    case 'click': {
+    case 'TOGGLE_CLICK': {
       return {
         ...state,
-        toggleMenu: !action.value,
+        toggleMenu: !state.toggleMenu,
       };
     }
     default:
