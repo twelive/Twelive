@@ -39,5 +39,7 @@ const Button = styled.button`
   height: 3rem;
   border: none;
   background-color: transparent;
+color: var(--darkmode-color);
+  
   cursor: pointer;
 `;
