@@ -2,6 +2,9 @@ import React, { ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
+import HeaderButton from '@components/HeaderButton';
+import HomeLogo from '@hooks/HomeLogo';
+
 import mainlogo from '@assets/common-logo.svg';
 import whitemainlogo from '@assets/common-whitemainlogo.svg';
 import search from '@assets/common-search.svg';
@@ -14,7 +17,6 @@ import mic from '@assets/common-mic.svg';
 import whitemic from '@assets/common-whitemic.svg';
 import blacksun from '@assets/common-blacksun.svg';
 import whitemoon from '@assets/common-whitemoon.svg';
-import HeaderButton from '@components/HeaderButton';
 
 function Header(): ReactElement {
   const dispatch = useDispatch();
@@ -64,14 +66,7 @@ function Header(): ReactElement {
     <>
       <HeadBar>
         <Div className="buttonContainer containerOption">
-          {isMobile && (
-            <HeaderButton
-              buttonClass="homeButton"
-              src={currentImages.logo}
-              imgClass="homelogo"
-              title="트웰브 홈으로"
-            ></HeaderButton>
-          )}
+          {isMobile && <HomeLogo src={currentImages.logo} />}
           {(isLaptop || isDesktop) && (
             <Div className="leftContainer containerOption">
               <HeaderButton
@@ -80,13 +75,8 @@ function Header(): ReactElement {
                 src={currentImages.menu}
                 title="상세 메뉴"
                 onClick={handleToggle}
-              ></HeaderButton>{' '}
-              <HeaderButton
-                buttonClass="homeButton"
-                imgClass="homelogo"
-                src={currentImages.logo}
-                title="트웰브 홈으로"
-              ></HeaderButton>{' '}
+              ></HeaderButton>
+              <HomeLogo src={currentImages.logo} />
             </Div>
           )}
 
@@ -97,15 +87,13 @@ function Header(): ReactElement {
                 imgClass="mobileImg"
                 src={currentImages.search}
                 title="검색버튼"
-              >
-                {' '}
-              </HeaderButton>{' '}
+              ></HeaderButton>
               <HeaderButton
                 buttonClass="loginButton"
                 src={currentImages.login}
                 imgClass="mobileImg"
                 title="사용자 "
-              ></HeaderButton>{' '}
+              ></HeaderButton>
               <HeaderButton
                 buttonClass="darkmodeButton "
                 src={currentImages.darkModeButton}
@@ -119,7 +107,12 @@ function Header(): ReactElement {
           {(isLaptop || isDesktop) && (
             <Div className="searchWrapper containerOption">
               <Div className="searchContainer containerOption">
-                <form id="form" name="form" action="" method="get">
+                <form
+                  id="form"
+                  name="form"
+                  action="/videos/popular.json"
+                  method="GET"
+                >
                   <div className="search-wrapper">
                     <fieldset className="search">
                       <input
@@ -136,8 +129,9 @@ function Header(): ReactElement {
                   buttonClass="searchButton searchOption"
                   src={search}
                   title="영상검색"
+                  type="submit"
                 ></HeaderButton>
-              </Div>{' '}
+              </Div>
               <HeaderButton
                 buttonClass="micButton"
                 src={currentImages.mic}
@@ -155,7 +149,7 @@ function Header(): ReactElement {
                 title="사용자"
               >
                 <Div className="login containerOption">
-                  <span className="loginText">로그인</span>{' '}
+                  <span className="loginText">로그인</span>
                 </Div>
               </HeaderButton>
               <HeaderButton
@@ -181,7 +175,8 @@ const HeadBar = styled.header`
   position: fixed;
   width: 100%;
   height: 3rem;
-  box-shadow: 1px 1px 4px 0px #d4d4d4;
+  box-shadow: 0.0625rem 0.0625rem 0.25rem 0 #d4d4d4;
+  z-index: 1;
 `;
 
 const Div = styled.div`
@@ -203,15 +198,15 @@ const Div = styled.div`
     input {
       box-sizing: border-box;
       border: 0.05rem solid var(--button-border-color);
-      border-radius: 20px 0 0 20px;
+      border-radius: 1.25rem 0 0 1.25rem;
       padding: 8px;
-      height: 35px;
+      height: 2.1875rem;
 
       @media ${(props) => props.theme.tablet} {
-        width: 350px;
+        width: 21.875rem;
       }
       @media ${(props) => props.theme.laptop} {
-        width: 500px;
+        width: 31.25rem;
       }
     }
   }

@@ -55,22 +55,12 @@ function MenuBar(): ReactElement {
       {toggleMenu && <Backdrop onClick={handleToggle} />}
       <VisibleMenu isActive={toggleMenu}>
         <Div>
-          <Button className="activeTotalLogo">
-            <img
-              src={menu}
-              alt="메뉴"
-              className="menu"
-              onClick={handleToggle}
-            />
-          </Button>
-          <Button className="activeTotalLogo">
-            <img
-              src={mainlogo}
-              alt="트웰리브"
-              className="manilogo"
-              onClick={handleToggle}
-            />
-          </Button>
+          <button>
+            <img src={menu} alt="메뉴" onClick={handleToggle} />
+          </button>
+          <button>
+            <HomeImg src={mainlogo} alt="트웰리브" onClick={handleToggle} />
+          </button>
         </Div>
         <Ul>
           {menuItems.map((item) => (
@@ -94,52 +84,82 @@ function MenuBar(): ReactElement {
 
 export default MenuBar;
 
+const VisibleMenu = styled.div<VisibleMenuProps>`
+  width: 15.625rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: ${({ isActive }) => (isActive ? '0' : '-250px')};
+  transition: left 0.3s ease-in-out;
+  background-color: #fff;
+  backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
+  z-index: 3;
+`;
+
+const Backdrop = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+`;
+
 const Div = styled.div`
-  padding-left: 0.75rem;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  cursor: pointer;
-  &.activeTotalLogo {
+  gap: 1rem;
+  padding-left: 0.75rem;
+
+  & button {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    height: 1.5rem;
+    box-sizing: border-box;
+    padding: 1.25rem 0;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+    }
   }
 `;
 
+const HomeImg = styled.img`
+  height: 2.5rem;
+`;
+
 const Button = styled.button`
+  display: flex;
   width: 100%;
-  border-style: none;
-  box-sizing: border-box;
   height: 1.5rem;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.25rem 0;
+  border-style: none;
   background-color: transparent;
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
   transition: background-color 0.3s ease;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  align-items: center;
 
   &:hover {
-    background-color: rgba(4, 90, 220, 0.5);
+    width: 95%;
+    border-radius: 0.5rem;
     color: black;
-    border-radius: 8px;
+    background-color: rgba(4, 90, 220, 0.5);
   }
 
-  &.activeTotalLogo:hover {
-    background-color: white;
-  }
-  &.subscribeButton {
-    border-bottom: 1px solid #d4d4d4;
-  }
+  &.subscribeButton,
   &.historyButton {
     border-bottom: 1px solid #d4d4d4;
   }
 
   &.active {
-    background-color: #045adc;
+    width: 95%;
     color: black;
-    border-radius: 8px;
+    background-color: #045adc;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -150,37 +170,15 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
-  padding-top: 5px;
-  padding-bottom: 5px;
-  vertical-align: middle;
   align-items: center;
   text-align: center;
+  vertical-align: middle;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
 `;
 
 const Lable = styled.p`
-  margin-top: 5px;
   text-align: center;
-  padding-left: 10px;
-`;
-
-const VisibleMenu = styled.div<VisibleMenuProps>`
-  width: 250px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: ${({ isActive }) => (isActive ? '0' : '-250px')};
-  transition: left 0.3s ease-in-out;
-  background-color: #fff;
-  backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
-  z-index: 999;
-`;
-
-const Backdrop = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 998;
+  margin-top: 0.3125rem;
+  padding-left: 0.625rem;
 `;
