@@ -36,7 +36,7 @@ function DetailPage() {
       if (data.items && data.items[clickedIndex]) {
         const clickedItem = data.items[clickedIndex];
         const currentChannelId = clickedItem.snippet.channelId;
-        dispatch({ type: 'updateChannelId', update: currentChannelId });
+        dispatch({ type: 'CHANNELID_UPDATE', update: currentChannelId });
         navigate(`/detail/${currentChannelId}`);
       }
     }
