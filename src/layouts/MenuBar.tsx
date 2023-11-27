@@ -1,21 +1,21 @@
 import React, { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from "styled-components";
-import menu from '../assets/common-menu.svg';
-import shorts from '../assets/common-shorts.svg';
-import subscribe from '../assets/common-subscribe.svg';
-import playlist from '../assets/common-playlist.svg';
-import history from '../assets/common-history.svg';
-import rank from '../assets/common-rank.svg';
-import shopping from '../assets/common-shopping.svg';
-import music from '../assets/common-music.svg';
-import movie from '../assets/common-movie.svg';
-import live from '../assets/common-live.svg';
-import game from '../assets/common-game.svg';
-import sports from '../assets/common-sports.svg';
-import educate from '../assets/common-educate.svg';
-import podcast from '../assets/common-podcast.svg';
-import mainlogo from '../assets/common-logo.svg';
+import styled from 'styled-components';
+import menu from '@assets/common-menu.svg';
+import shorts from '@assets/common-shorts.svg';
+import subscribe from '@assets/common-subscribe.svg';
+import playlist from '@assets/common-playlist.svg';
+import history from '@assets/common-history.svg';
+import rank from '@assets/common-rank.svg';
+import shopping from '@assets/common-shopping.svg';
+import music from '@assets/common-music.svg';
+import movie from '@assets/common-movie.svg';
+import live from '@assets/common-live.svg';
+import game from '@assets/common-game.svg';
+import sports from '@assets/common-sports.svg';
+import educate from '@assets/common-educate.svg';
+import podcast from '@assets/common-podcast.svg';
+import mainlogo from '@assets/common-logo.svg';
 
 interface VisibleMenuProps {
   isActive: boolean;
@@ -52,21 +52,33 @@ function MenuBar(): ReactElement {
 
   return (
     <>
-      {toggleMenu && <Backdrop onClick={handleToggle}/>}
+      {toggleMenu && <Backdrop onClick={handleToggle} />}
       <VisibleMenu isActive={toggleMenu}>
         <Div>
-          <Button className='activeTotalLogo'>
-            <img src={menu} alt="메뉴" className="menu" onClick={handleToggle} /> 
+          <Button className="activeTotalLogo">
+            <img
+              src={menu}
+              alt="메뉴"
+              className="menu"
+              onClick={handleToggle}
+            />
           </Button>
-          <Button className='activeTotalLogo'>
-            <img src={mainlogo} alt="트웰리브" className="manilogo" onClick={handleToggle} />  
+          <Button className="activeTotalLogo">
+            <img
+              src={mainlogo}
+              alt="트웰리브"
+              className="manilogo"
+              onClick={handleToggle}
+            />
           </Button>
         </Div>
         <Ul>
           {menuItems.map((item) => (
             <Li key={item.name}>
               <Button
-                className={`${item.name}Button ${activeButton === item.name ? 'active' : ''}`}
+                className={`${item.name}Button ${
+                  activeButton === item.name ? 'active' : ''
+                }`}
                 onClick={() => handleButtonClick(item.name)}
               >
                 <img src={item.icon} alt={item.label} className={item.name} />
@@ -104,12 +116,12 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   transition: background-color 0.3s ease;
-  padding-top: 20px; 
-  padding-bottom: 20px; 
+  padding-top: 20px;
+  padding-bottom: 20px;
   align-items: center;
-  
+
   &:hover {
-    background-color: rgba(4, 90, 220, 0.5); 
+    background-color: rgba(4, 90, 220, 0.5);
     color: black;
     border-radius: 8px;
   }
@@ -118,12 +130,12 @@ const Button = styled.button`
     background-color: white;
   }
   &.subscribeButton {
-    border-bottom: 1px solid #D4D4D4;
+    border-bottom: 1px solid #d4d4d4;
   }
   &.historyButton {
-    border-bottom: 1px solid #D4D4D4;
+    border-bottom: 1px solid #d4d4d4;
   }
-  
+
   &.active {
     background-color: #045adc;
     color: black;
@@ -131,7 +143,7 @@ const Button = styled.button`
   }
 `;
 
-const Ul = styled.ul` 
+const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   padding-left: 0.75rem;
@@ -146,7 +158,7 @@ const Li = styled.li`
 `;
 
 const Lable = styled.p`
-  margin-top: 5px; 
+  margin-top: 5px;
   text-align: center;
   padding-left: 10px;
 `;
@@ -156,11 +168,11 @@ const VisibleMenu = styled.div<VisibleMenuProps>`
   height: 100vh;
   position: fixed;
   top: 0;
-  left: ${({ isActive }) => (isActive ? '0' : '-250px')}; 
+  left: ${({ isActive }) => (isActive ? '0' : '-250px')};
   transition: left 0.3s ease-in-out;
-  background-color: #fff; 
+  background-color: #fff;
   backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
-  z-index: 999; 
+  z-index: 999;
 `;
 
 const Backdrop = styled.div`
@@ -169,6 +181,6 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7); 
-  z-index: 998; 
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 998;
 `;

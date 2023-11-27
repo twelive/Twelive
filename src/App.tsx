@@ -1,20 +1,22 @@
 import React from 'react';
-import GlobalStyles from './GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import theme from './theme';
-import Router from './Router';
 import { useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import Router from '@/Router';
+import GlobalStyles from '@/GlobalStyles';
+import theme from '@/theme';
 
 function App() {
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
+
   const currentTheme = {
     ...theme.device,
-    ...(darkMode ? theme.darkMode : theme.lightMode)
+    ...(darkMode ? theme.darkMode : theme.lightMode),
   };
+
   return (
     <>
       <ThemeProvider theme={currentTheme}>
-      <GlobalStyles />
+        <GlobalStyles />
         <Router />
       </ThemeProvider>
     </>

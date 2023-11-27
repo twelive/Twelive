@@ -14,7 +14,7 @@ function MainListPage() {
       try {
         const response = await fetch('/videos/popular.json');
         const list = await response.json();
-        dispatch({ type: 'fetch', payload: list });
+        dispatch({ type: 'DATA_FETCH', payload: list });
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -31,7 +31,7 @@ function MainListPage() {
       if (data.items && data.items[clickedIndex]) {
         const clickedItem = data.items[clickedIndex];
         const currentChannelId = clickedItem.snippet.channelId;
-        dispatch({ type: 'updateChannelId', update: currentChannelId });
+        dispatch({ type: 'CHANNELID_UPDATE', update: currentChannelId });
         navigate(`/detail/${currentChannelId}`);
       }
     }
@@ -42,11 +42,16 @@ function MainListPage() {
       {data.items &&
         data.items.map((item: VideoItem, index: number) => (
           <motion.div
-            whileHover={{ backgroundColor: 'var(--darkmode-bgColor)', scale: 1.1, color: 'var(--darkmode-color)'}}
+            whileHover={{
+              backgroundColor: 'var(--darkmode-bgColor)',
+              scale: 1.1,
+              color: 'var(--darkmode-color)',
+            }}
             key={index}
             style={{
               backgroundColor: 'transparent',
-              transition: 'background-color 0.2s ease-in-out', color: 'var(--darkmode-color)'
+              transition: 'background-color 0.2s ease-in-out',
+              color: 'var(--darkmode-color)',
             }}
             onClick={MainClick}
           >
@@ -82,8 +87,6 @@ const Main = styled.div`
   gap: 20px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-
-  
 
   @media ${(props) => props.theme.tablet} {
     max-width: 1010px;

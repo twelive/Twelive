@@ -1,10 +1,11 @@
 const initialState: ThemeState = {
-  darkMode: false
+  darkMode: false,
 };
 
-
-
-const themeReducer = (state = initialState, action: ThemeAction): ThemeState => {
+const themeReducer = (
+  state = initialState,
+  action: ThemeAction
+): ThemeState => {
   switch (action.type) {
     case 'TOGGLE_THEME':
       return { darkMode: !state.darkMode };

@@ -1,4 +1,3 @@
-
 const deviceSizes = {
   mobile: '47.9375rem',
   tablet: '63.125rem',
@@ -10,7 +9,6 @@ const theme = {
     color: '#ffffff',
     bgColor: '#202020',
     hoverColor: '#a3a3a3',
-
   },
   lightMode: {
     color: '#000000',
@@ -22,10 +20,6 @@ const theme = {
     tablet: `(min-width: ${deviceSizes.mobile}) and (max-width: ${deviceSizes.tablet})`,
     laptop: `(min-width: ${deviceSizes.tablet}) and (max-width: ${deviceSizes.laptop})`,
   },
-
 };
-
-
-
 
 export default theme;

@@ -8,6 +8,7 @@
       "@hooks/*": ["./hooks/*"],
       "@layouts/*": ["./layouts/*"],
       "@pages/*": ["./pages/*"],
+      "@reducers/*": ["./reducers/*"],
       "@store/*": ["./store/*"],
       "@styles/*": ["./styles/*"],
       "@types/*": ["./types/*"],

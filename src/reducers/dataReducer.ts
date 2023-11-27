@@ -4,7 +4,7 @@ const initialState: DataState = {
 
 function dataReducer(state: DataState = initialState, action: DataAction) {
   switch (action.type) {
-    case 'fetch': {
+    case 'DATA_FETCH': {
       return {
         ...state,
         data: action.payload,

@@ -23,7 +23,7 @@ function DetailPage() {
       if (data.items && data.items[clickedIndex]) {
         const clickedItem = data.items[clickedIndex];
         const currentChannelId = clickedItem.snippet.channelId;
-        dispatch({ type: 'updateChannelId', update: currentChannelId });
+        dispatch({ type: 'CHANNELID_UPDATE', update: currentChannelId });
         navigate(`/detail/${currentChannelId}`);
       }
     }
@@ -131,8 +131,6 @@ const VideoContent = styled.div`
     margin-bottom: 0.625rem;
     font-size: 1.125rem;
     font-weight: 600;
-  
-
   }
 
   dt {
@@ -241,7 +239,6 @@ const SubTextBox = styled.div`
   opacity: 70%;
   cursor: pointer;
   color: var(--darkmode-color);
-
 `;
 
 const SubTitleText = styled.p`
@@ -258,13 +255,11 @@ const SubTimeBox = styled.div`
   flex-direction: column;
   font-size: 0.875rem;
   color: var(--darkmode-color);
-
 `;
 
 const TimeContent = styled.p`
   @media ${(props) => props.theme.mobile} {
     display: none;
-  color: var(--darkmode-color);
-
+    color: var(--darkmode-color);
   }
 `;

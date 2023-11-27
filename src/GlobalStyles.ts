@@ -5,7 +5,6 @@ const GlobalStyles = createGlobalStyle`
 html, body, #root {
   font-family: 'SUITE', 'SUITE Variable', sans-serif;
   background-color: ${(props) => props.theme.bgColor};
-
 }
 
 /* reset CSS */
@@ -67,7 +66,6 @@ table {
 				--darkmode-color: ${(props) => props.theme.color};
 				--darkmode-bgColor: ${(props) => props.theme.bgColor};
     }
-
 `;
 
 export default GlobalStyles;
