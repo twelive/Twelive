@@ -1,6 +1,3 @@
-type NavAction =
-  | { type: 'NAV_CLICK', payload?: string }
- 
 const initialState: NavState = {
   navMenu: '홈',
 };

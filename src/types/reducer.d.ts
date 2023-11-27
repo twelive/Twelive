@@ -22,27 +22,26 @@ interface ThemeState {
   darkMode: boolean;
 }
 
-
 // 액션 타입 정의
 type NavAction = {
-  type: 'click';
+  type: 'NAV_CLICK';
   payload?: string;
 };
 
 type ToggleAction = {
-  type: 'toggle';
+  type: 'TOGGLE_CLICK';
   value?: boolean;
 };
 
 interface ClickAction {
-  type: 'fetch';
+  type: 'DATA_FETCH';
   payload: JsonObject;
 }
 
 type DataAction = ClickAction;
 
 interface DetailAction {
-  type: `updateChannelId`;
+  type: `CHANNELID_UPDATE`;
   update: stiring;
 }
 

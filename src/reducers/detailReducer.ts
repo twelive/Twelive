@@ -7,7 +7,7 @@ function detailReducer(
   action: DetailAction
 ) {
   switch (action.type) {
-    case 'updateChannelId': {
+    case 'CHANNELID_UPDATE': {
       return {
         ...state,
         channelId: action.update,
