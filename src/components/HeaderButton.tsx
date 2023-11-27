@@ -1,9 +1,12 @@
 import React, { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface HeaderButtonProps {
   src: string;
   title: string;
+  type?: 'button' | 'submit' | 'reset';
+  href?: string;
   buttonClass?: string;
   className?: string;
   children?: ReactNode;
@@ -14,20 +17,36 @@ interface HeaderButtonProps {
 function HeaderButton({
   src,
   title,
+  type = 'button',
+  href,
   buttonClass,
   children,
   imgClass,
   onClick,
 }: HeaderButtonProps) {
+  const ComponentName: React.ComponentType<any> = href ? StyledLink : Button;
   return (
-    <Button type="button" className={buttonClass}>
+    <ComponentName type={href ? type : null} to={href} className={buttonClass}>
       <Img src={src} className={imgClass} alt={title} onClick={onClick} />
       {children}
-    </Button>
+    </ComponentName>
   );
 }
 
 export default HeaderButton;
+
+const StyledLink = styled(Link)`
+  height: 3.125rem;
+  box-sizing: border-box;
+  margin-left: 0.75rem;
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &.homelogo {
+    height: 2.5rem;
+  }
+`;
 
 const Button = styled.button`
   border-style: none;
