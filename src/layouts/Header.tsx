@@ -63,107 +63,105 @@ function Header(): ReactElement {
   };
 
   return (
-    <>
-      <HeadBar>
-        <Div className="buttonContainer containerOption">
-          {isMobile && <HomeLogo src={currentImages.logo} />}
-          {(isLaptop || isDesktop) && (
-            <Div className="leftContainer containerOption">
-              <HeaderButton
-                buttonClass="hamburgerButton arrayOption"
-                imgClass="hamburger"
-                src={currentImages.menu}
-                title="상세 메뉴"
-                onClick={handleToggle}
-              ></HeaderButton>
-              <HomeLogo src={currentImages.logo} />
-            </Div>
-          )}
+    <HeadBar>
+      <Div className="buttonContainer containerOption">
+        {isMobile && <HomeLogo src={currentImages.logo} />}
+        {(isLaptop || isDesktop) && (
+          <Div className="leftContainer containerOption">
+            <HeaderButton
+              buttonClass="hamburgerButton arrayOption"
+              imgClass="hamburger"
+              src={currentImages.menu}
+              title="상세 메뉴"
+              onClick={handleToggle}
+            ></HeaderButton>
+            <HomeLogo src={currentImages.logo} />
+          </Div>
+        )}
 
-          {isMobile && (
-            <Div className="containerOption">
-              <HeaderButton
-                buttonClass="searchButton"
-                imgClass="mobileImg"
-                src={currentImages.search}
-                title="검색버튼"
-              ></HeaderButton>
-              <HeaderButton
-                buttonClass="loginButton"
-                src={currentImages.login}
-                imgClass="mobileImg"
-                title="사용자 "
-              ></HeaderButton>
-              <HeaderButton
-                buttonClass="darkmodeButton "
-                src={currentImages.darkModeButton}
-                title="다크모드"
-                imgClass="darkMode"
-                onClick={handleDarkModeToggle}
-              ></HeaderButton>
-            </Div>
-          )}
+        {isMobile && (
+          <Div className="containerOption">
+            <HeaderButton
+              buttonClass="searchButton"
+              imgClass="mobileImg"
+              src={currentImages.search}
+              title="검색버튼"
+            ></HeaderButton>
+            <HeaderButton
+              buttonClass="loginButton"
+              src={currentImages.login}
+              imgClass="mobileImg"
+              title="사용자 "
+            ></HeaderButton>
+            <HeaderButton
+              buttonClass="darkmodeButton "
+              src={currentImages.darkModeButton}
+              title="다크모드"
+              imgClass="darkMode"
+              onClick={handleDarkModeToggle}
+            ></HeaderButton>
+          </Div>
+        )}
 
-          {(isLaptop || isDesktop) && (
-            <Div className="searchWrapper containerOption">
-              <Div className="searchContainer containerOption">
-                <form
-                  id="form"
-                  name="form"
-                  action="/videos/popular.json"
-                  method="GET"
-                >
-                  <div className="search-wrapper">
-                    <fieldset className="search">
-                      <input
-                        type="text"
-                        className="searchTxt"
-                        name="searchTxt"
-                        title="영상검색"
-                        placeholder="검색"
-                      />
-                    </fieldset>
-                  </div>
-                </form>
-                <HeaderButton
-                  buttonClass="searchButton searchOption"
-                  src={search}
-                  title="영상검색"
-                  type="submit"
-                ></HeaderButton>
-              </Div>
-              <HeaderButton
-                buttonClass="micButton"
-                src={currentImages.mic}
-                title="음성검색"
-              ></HeaderButton>
-            </Div>
-          )}
-
-          {(isLaptop || isDesktop) && (
-            <Div className="rightContainer containerOption">
-              <HeaderButton
-                buttonClass="loginButton arrayOption roundedOption"
-                src={currentImages.login}
-                imgClass="loginImg"
-                title="사용자"
+        {(isLaptop || isDesktop) && (
+          <Div className="searchWrapper containerOption">
+            <Div className="searchContainer containerOption">
+              <form
+                id="form"
+                name="form"
+                action="/videos/popular.json"
+                method="GET"
               >
-                <Div className="login containerOption">
-                  <span className="loginText">로그인</span>
-                </Div>
-              </HeaderButton>
+                <div className="search-wrapper">
+                  <fieldset className="search">
+                    <input
+                      type="text"
+                      className="searchTxt"
+                      name="searchTxt"
+                      title="영상검색"
+                      placeholder="검색"
+                    />
+                  </fieldset>
+                </div>
+              </form>
               <HeaderButton
-                buttonClass="darkmodeButton "
-                src={currentImages.darkModeButton}
-                title="다크모드"
-                imgClass="darkMode"
-                onClick={handleDarkModeToggle}
+                buttonClass="searchButton searchOption"
+                src={search}
+                title="영상검색"
+                type="submit"
               ></HeaderButton>
             </Div>
-          )}
-        </Div>
-      </HeadBar>
-    </>
+            <HeaderButton
+              buttonClass="micButton"
+              src={currentImages.mic}
+              title="음성검색"
+            ></HeaderButton>
+          </Div>
+        )}
+
+        {(isLaptop || isDesktop) && (
+          <Div className="rightContainer containerOption">
+            <HeaderButton
+              buttonClass="loginButton arrayOption roundedOption"
+              src={currentImages.login}
+              imgClass="loginImg"
+              title="사용자"
+            >
+              <Div className="login containerOption">
+                <span className="loginText">로그인</span>
+              </Div>
+            </HeaderButton>
+            <HeaderButton
+              buttonClass="darkmodeButton "
+              src={currentImages.darkModeButton}
+              title="다크모드"
+              imgClass="darkMode"
+              onClick={handleDarkModeToggle}
+            ></HeaderButton>
+          </Div>
+        )}
+      </Div>
+    </HeadBar>
   );
 }
 
@@ -171,7 +169,6 @@ export default Header;
 
 const HeadBar = styled.header`
   background-color: ${(props) => props.theme.bgColor};
-
   position: fixed;
   width: 100%;
   height: 3rem;
