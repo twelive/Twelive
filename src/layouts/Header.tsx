@@ -176,6 +176,7 @@ const HeadBar = styled.header`
   width: 100%;
   height: 3rem;
   box-shadow: 0.0625rem 0.0625rem 0.25rem 0 #d4d4d4;
+  z-index: 1;
 `;
 
 const Div = styled.div`
