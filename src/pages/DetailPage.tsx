@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,24 +6,37 @@ import styled from 'styled-components';
 function DetailPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
-  const [detailData, useDetailData] = useState([]);
+  const [detailData, setDetailData] = useState([]);
   const { snippet } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
   );
+  const [renderedData, setRenderedData] = useState([]);
+  const [itemCount, setItemCount] = useState(10);
+
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
+    console.log('Scroll event fired');
+    if (scrollHeight - Math.ceil(scrollTop) <= clientHeight) {
+      console.log('Load more data');
+      setItemCount((prevCount) => prevCount + 10);
+    }
+  }, []);
+
+  useEffect(() => {
+    setRenderedData(detailData.slice(0, itemCount));
+  }, [detailData, itemCount]);
 
   const clickLink = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.parentElement) {
       const clickedIndex = Array.from(
         e.currentTarget.parentElement.children
       ).indexOf(e.currentTarget);
-
       if (data.items && data.items[clickedIndex]) {
         const clickedItem = data.items[clickedIndex];
         const currentChannelId = clickedItem.snippet.channelId;
-        dispatch({ type: 'CHANNELID_UPDATE', update: currentChannelId });
+        dispatch({ type: 'updateChannelId', update: currentChannelId });
         navigate(`/detail/${currentChannelId}`);
       }
     }
@@ -36,7 +49,8 @@ function DetailPage() {
           `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
         );
         const data = await response.json();
-        useDetailData(data.items);
+        setDetailData(data.items);
+        setRenderedData(data.items.slice(0, itemCount));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -44,9 +58,13 @@ function DetailPage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setRenderedData(detailData.slice(0, itemCount));
+  }, [detailData, itemCount]);
+
   return (
     <>
-      {detailData && (
+      {renderedData && (
         <Box key={channelId}>
           <MainBox>
             <Video
@@ -68,13 +86,12 @@ function DetailPage() {
                   <dt>설명</dt>
                   <dd>{snippet.description}</dd>
                 </dl>
-                {/* <button type="button">더보기</button> */}
               </ContentDetail>
             </VideoContent>
           </MainBox>
-          <ScrollBox>
-            {detailData &&
-              detailData.map((item: Item) => (
+          <ScrollBox onScroll={handleScroll}>
+            {renderedData &&
+              renderedData.map((item: Item) => (
                 <SubBox key={item.id.videoId}>
                   <SubImgBox onClick={clickLink}>
                     <img
@@ -136,7 +153,7 @@ const VideoContent = styled.div`
   dt {
     overflow: hidden;
     position: absolute;
-    clip: rect(0 0 0 0); /* IE 6,7 */
+    clip: rect(0 0 0 0);
     clip: rect(0, 0, 0, 0);
     width: 0.0625rem;
     height: 0.0625rem;
@@ -167,26 +184,26 @@ const ContentDetail = styled.dl`
 `;
 
 const ScrollBox = styled.div`
-  @media ${(props) => props.theme.laptop} {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
+  height: calc(100vh - 100px);
+  overflow-y: scroll;
 
-    &::-webkit-scrollbar {
-      width: 0.625rem; /* 필수값 */
-    }
+  &::-webkit-scrollbar {
+    width: 0.625rem;
+  }
 
-    &::-webkit-scrollbar-thumb {
-      background: var(--button-hover-color);
-      border-radius: var(--primary-margin);
-    }
+  &::-webkit-scrollbar-thumb {
+    background: var(--button-hover-color);
+    border-radius: var(--primary-margin);
+  }
 
-    &::-webkit-scrollbar-track {
-      background: rgba(4, 90, 220, 0.1);
-      border-radius: var(--primary-margin);
-      margin-top: 0.625rem;
-    }
+  &::-webkit-scrollbar-track {
+    background: rgba(4, 90, 220, 0.1);
+    border-radius: var(--primary-margin);
+    margin-top: 0.625rem;
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    height: calc(100vh - 400px);
   }
 `;
 
@@ -245,7 +262,7 @@ const SubTitleText = styled.p`
   overflow: hidden;
   display: -webkit-box;
   font-weight: 600;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   color: var(--darkmode-color);
 `;
