@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import RootLayout from './RootLayout';
-import MainListPage from './pages/MainListPage';
-import DetailPage from './pages/DetailPage';
-import Error404Page from './pages/Error404Page';
+import RootLayout from '@/RootLayout';
+import MainListPage from '@pages/MainListPage';
+import DetailPage from '@pages/DetailPage';
+import Error404Page from '@pages/Error404Page';
 
 const Router = () => {
   return (
