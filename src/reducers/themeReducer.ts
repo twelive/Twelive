@@ -1,6 +1,6 @@
 const initialState: ThemeState = {
   darkMode: JSON.parse(localStorage.getItem("darkMode") || "false"),
-
+//.
 };
 
 const themeReducer = (
