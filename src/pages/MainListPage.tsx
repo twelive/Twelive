@@ -4,15 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { motion } from 'framer-motion';
 import Spinner from '@/components/Spinner';
+import ErrorPage from './ErrorPage';
 
 function MainListPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.data);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const fetchData = async () => {
     setIsLoading(true);
+    setIsError(true);
     try {
       const response = await fetch(
         '/videos/popular.json'
@@ -24,6 +27,7 @@ function MainListPage() {
       console.error('Error fetching data:', error);
     }
     setIsLoading(false);
+    setIsError(false);
   };
 
   useEffect(() => {
@@ -45,6 +49,8 @@ function MainListPage() {
     }
   };
   if (isLoading) return <Spinner />;
+  if (isError) return <ErrorPage />;
+
   return (
     <Main>
       {data.items &&

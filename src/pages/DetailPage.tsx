@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommentItem from '@/components/CommentItem';
 import Spinner from '@/components/Spinner';
+import ErrorPage from './ErrorPage';
 
 function DetailPage() {
   const dispatch = useDispatch();
@@ -17,7 +18,8 @@ function DetailPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [renderedData, setRenderedData] = useState([]);
   const [itemCount, setItemCount] = useState(10);
- 
+  const [isError, setIsError] = useState(false);
+
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
     if (scrollHeight - Math.ceil(scrollTop) <= clientHeight) {
@@ -46,6 +48,8 @@ function DetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+      setIsError(true);
+
       try {
         const response = await fetch(
           `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
@@ -59,6 +63,7 @@ function DetailPage() {
         console.error('Error fetching data:', error);
       }
       setIsLoading(false);
+      setIsError(false);
     };
     fetchData();
   }, []);
@@ -68,6 +73,7 @@ function DetailPage() {
   }, [detailData, itemCount]);
 
   if (isLoading) return <Spinner />;
+  if (isError) return <ErrorPage />;
 
   return (
     <>
