@@ -5,12 +5,15 @@ import styled from 'styled-components';
 function SearchPage() {
   const { data } = useSelector((state: RootState) => state.data);
   const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  const { searchHistoryValue } = useSelector(
+    (state: RootState) => state.searchHistoryValue
+  );
 
   const filterValue = data.items.filter((item: VideoItem) => {
     return item.snippet.title.toUpperCase().includes(searchValue.toUpperCase());
   });
 
-  console.log(filterValue);
+  // console.log(filterValue);
 
   return (
     <ul>
@@ -21,7 +24,17 @@ function SearchPage() {
           ))}
         </>
       ) : (
-        <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+        <>
+          {searchHistoryValue ? (
+            <>
+              {searchHistoryValue.map((item: VideoItem) => (
+                <ListItem key={item.id}>{item.snippet.title}</ListItem>
+              ))}
+            </>
+          ) : (
+            <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+          )}
+        </>
       )}
     </ul>
   );

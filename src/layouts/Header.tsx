@@ -27,7 +27,7 @@ import HeaderBackButton from '@/hooks/HeaderBackButton';
 function Header(): ReactElement {
   const dispatch = useDispatch();
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
-  const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  // const { searchValue } = useSelector((state: RootState) => state.searchValue);
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -74,7 +74,7 @@ function Header(): ReactElement {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
-    console.log(searchValue);
+    dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
   };
 
   return (
