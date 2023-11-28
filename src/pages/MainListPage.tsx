@@ -1,24 +1,27 @@
-import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { motion } from 'framer-motion';
 
 function MainListPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.data);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=kr&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+      );
+      const list = await response.json();
+      dispatch({ type: 'DATA_FETCH', payload: list.items });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/videos/popular.json');
-        const list = await response.json();
-        dispatch({ type: 'DATA_FETCH', payload: list });
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     fetchData();
   }, []);
 
@@ -40,6 +43,7 @@ function MainListPage() {
   return (
     <Main>
       {data.items &&
+        data.items.length > 0 &&
         data.items.map((item: VideoItem, index: number) => (
           <motion.div
             whileHover={{
@@ -58,7 +62,11 @@ function MainListPage() {
             <MainBox key={index} onClick={MainClick}>
               <ImgBox>
                 <MainImg
-                  src={item.snippet.thumbnails.maxres.url}
+                  src={
+                    item.snippet.thumbnails.maxres?.url ||
+                    item.snippet.thumbnails.high?.url ||
+                    item.snippet.thumbnails.default?.url
+                  }
                   alt={item.snippet.title}
                 />
                 <SubBox>
@@ -72,6 +80,9 @@ function MainListPage() {
                 </SubBox>
               </ImgBox>
             </MainBox>
+            {/* {(!data.items || data.items.length === 0) && (
+              <div>데이터가 없습니다.</div>
+            )} */}
           </motion.div>
         ))}
     </Main>

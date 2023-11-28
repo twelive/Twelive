@@ -17,9 +17,7 @@ function DetailPage() {
 
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
-    console.log('Scroll event fired');
     if (scrollHeight - Math.ceil(scrollTop) <= clientHeight) {
-      console.log('Load more data');
       setItemCount((prevCount) => prevCount + 10);
     }
   }, []);
@@ -46,7 +44,7 @@ function DetailPage() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         );
         const data = await response.json();
         setDetailData(data.items);
