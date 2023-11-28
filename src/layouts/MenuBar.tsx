@@ -2,20 +2,36 @@ import React, { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import menu from '@assets/common-menu.svg';
+import whitemenu from '@assets/common-whitemenu.svg';
 import shorts from '@assets/common-shorts.svg';
+import whiteshorts from '@assets/common-whiteshorts.svg';
 import subscribe from '@assets/common-subscribe.svg';
+import whitesubscribe from '@assets/common-whitesubscribe.svg';
 import playlist from '@assets/common-playlist.svg';
-import history from '@assets/common-history.svg';
+import whiteplaylist from '@assets/common-whiteplaylist.svg';
+
 import rank from '@assets/common-rank.svg';
+import whiterank from '@assets/common-whiterank.svg';
 import shopping from '@assets/common-shopping.svg';
+import whiteshopping from '@assets/common-whiteshopping.svg';
 import music from '@assets/common-music.svg';
+import whitemusic from '@assets/common-whitemusic.svg';
+import history from '@assets/common-history.svg';
+import whitehistory from '@assets/common-whitehistory.svg';
 import movie from '@assets/common-movie.svg';
+import whitemovie from '@assets/common-whitemovie.svg';
 import live from '@assets/common-live.svg';
+import whitelive from '@assets/common-whitelive.svg';
 import game from '@assets/common-game.svg';
+import whitegame from '@assets/common-whitegame.svg';
 import sports from '@assets/common-sports.svg';
+import whitesports from '@assets/common-whitesports.svg';
 import educate from '@assets/common-educate.svg';
+import whiteeducate from '@assets/common-whiteeducate.svg';
 import podcast from '@assets/common-podcast.svg';
+import whitepodcast from '@assets/common-whitepodcast.svg';
 import mainlogo from '@assets/common-logo.svg';
+import whitemainlogo from '@assets/common-whitemainlogo.svg';
 
 interface VisibleMenuProps {
   isActive: boolean;
@@ -33,22 +49,64 @@ function MenuBar(): ReactElement {
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
   };
+  const images = {
+    darkMode: {
+      menu: whitemenu,
+      shorts: whiteshorts,
+      subscribe: whitesubscribe,
+      playlist: whiteplaylist,
+      history: whitehistory,
+      rank: whiterank,
+      shopping: whiteshopping,
+      music: whiteshopping,
+      movie: whitemovie,
+      live: whitelive,
+      game: whitegame,
+      sports: whitesports,
+      educate: whiteeducate,
+      podcast: whitepodcast,
+      mainlogo: whitemainlogo,
+
+        },
+    lightMode: {
+      menu: menu,
+      shorts: shorts,
+      subscribe: subscribe,
+      playlist: playlist,
+      history: history,
+      rank: rank,
+      shopping: shopping,
+      music: shopping,
+      movie: movie,
+      live: live,
+      game: game,
+      sports: sports,
+      educate: educate,
+      podcast: podcast,
+      mainlogo: mainlogo,
+    },
+  };
+  const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
+
+  const currentImages = darkMode ? images.darkMode : images.lightMode;
 
   const menuItems = [
-    { name: 'shorts', icon: shorts, label: 'Shorts' },
-    { name: 'subscribe', icon: subscribe, label: 'Subscribe' },
-    { name: 'playlist', icon: playlist, label: 'Playlist' },
-    { name: 'history', icon: history, label: 'History' },
-    { name: 'rank', icon: rank, label: 'Rank' },
-    { name: 'shopping', icon: shopping, label: 'Shopping' },
-    { name: 'music', icon: music, label: 'Music' },
-    { name: 'movie', icon: movie, label: 'Movie' },
-    { name: 'live', icon: live, label: 'Live' },
-    { name: 'game', icon: game, label: 'Game' },
-    { name: 'sports', icon: sports, label: 'Sports' },
-    { name: 'educate', icon: educate, label: 'Educate' },
-    { name: 'podcast', icon: podcast, label: 'Podcast' },
+    { name: 'shorts', icon: currentImages.shorts, label: 'Shorts' },
+    { name: 'subscribe', icon: currentImages.subscribe, label: 'Subscribe' },
+    { name: 'playlist', icon: currentImages.playlist, label: 'Playlist' },
+    { name: 'history', icon: currentImages.history, label: 'History' },
+    { name: 'rank', icon: currentImages.rank, label: 'Rank' },
+    { name: 'shopping', icon: currentImages.shopping, label: 'Shopping' },
+    { name: 'music', icon: currentImages.music, label: 'Music' },
+    { name: 'movie', icon: currentImages.movie, label: 'Movie' },
+    { name: 'live', icon: currentImages.live, label: 'Live' },
+    { name: 'game', icon: currentImages.game, label: 'Game' },
+    { name: 'sports', icon: currentImages.sports, label: 'Sports' },
+    { name: 'educate', icon: currentImages.educate, label: 'Educate' },
+    { name: 'podcast', icon: currentImages.podcast, label: 'Podcast' },
   ];
+
+
 
   return (
     <>
@@ -56,10 +114,10 @@ function MenuBar(): ReactElement {
       <VisibleMenu isActive={toggleMenu}>
         <Div>
           <button>
-            <img src={menu} alt="메뉴" onClick={handleToggle} />
+            <img src={currentImages.menu} alt="메뉴" onClick={handleToggle} />
           </button>
           <button>
-            <HomeImg src={mainlogo} alt="트웰리브" onClick={handleToggle} />
+            <HomeImg src={currentImages.mainlogo} alt="트웰리브" onClick={handleToggle} />
           </button>
         </Div>
         <Ul>
@@ -91,7 +149,7 @@ const VisibleMenu = styled.div<VisibleMenuProps>`
   top: 0;
   left: ${({ isActive }) => (isActive ? '0' : '-250px')};
   transition: left 0.3s ease-in-out;
-  background-color: #fff;
+  background-color: var(--darkmode-bgColor);
   backdrop-filter: blur(${({ isActive }) => (isActive ? '5px' : '0')});
   z-index: 3;
 `;
@@ -121,9 +179,7 @@ const Div = styled.div`
     border-style: none;
     cursor: pointer;
 
-    &:hover {
-      background-color: white;
-    }
+    
   }
 `;
 
@@ -147,7 +203,7 @@ const Button = styled.button`
     width: 95%;
     border-radius: 0.5rem;
     color: black;
-    background-color: rgba(4, 90, 220, 0.5);
+    background-color: ${(props) => props.theme.hoverColor};
   }
 
   &.subscribeButton,
@@ -181,4 +237,5 @@ const Lable = styled.p`
   text-align: center;
   margin-top: 0.3125rem;
   padding-left: 0.625rem;
+  color: var(--darkmode-color);
 `;
