@@ -1,25 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { motion } from 'framer-motion';
+import Spinner from '@/components/Spinner';
+import ErrorPage from './ErrorPage';
 
 function MainListPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.data);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
+    setIsError(true);
     try {
       const response = await fetch(
-        // `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=kr&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         '/videos/popular.json'
+        // `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=kr&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
       );
       const list = await response.json();
       dispatch({ type: 'DATA_FETCH', payload: list.items });
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+    setIsLoading(false);
+    setIsError(false);
   };
 
   useEffect(() => {
@@ -40,6 +48,8 @@ function MainListPage() {
       }
     }
   };
+  if (isLoading) return <Spinner />;
+  if (isError) return <ErrorPage />;
 
   return (
     <Main>
@@ -81,9 +91,6 @@ function MainListPage() {
                 </SubBox>
               </ImgBox>
             </MainBox>
-            {/* {(!data.items || data.items.length === 0) && (
-              <div>데이터가 없습니다.</div>
-            )} */}
           </motion.div>
         ))}
     </Main>

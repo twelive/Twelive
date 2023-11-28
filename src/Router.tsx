@@ -4,7 +4,7 @@ import RootLayout from '@/RootLayout';
 import MainListPage from '@pages/MainListPage';
 import DetailPage from '@pages/DetailPage';
 import SearchPage from '@pages/SearchPage';
-import Error404Page from '@pages/Error404Page';
+import ErrorPage from '@pages/ErrorPage';
 
 const Router = () => {
   return (
@@ -14,7 +14,7 @@ const Router = () => {
           <Route path="/" element={<MainListPage />} />
           <Route path="/detail/:detailId" element={<DetailPage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="*" element={<Error404Page />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

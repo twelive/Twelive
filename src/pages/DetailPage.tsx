@@ -2,6 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import CommentItem from '@/components/CommentItem';
+import Spinner from '@/components/Spinner';
+import ErrorPage from './ErrorPage';
 
 function DetailPage() {
   const dispatch = useDispatch();
@@ -12,8 +15,10 @@ function DetailPage() {
   const { snippet } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
   );
+  const [isLoading, setIsLoading] = useState(false);
   const [renderedData, setRenderedData] = useState([]);
   const [itemCount, setItemCount] = useState(10);
+  const [isError, setIsError] = useState(false);
 
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
@@ -42,17 +47,23 @@ function DetailPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setIsError(true);
+
       try {
         const response = await fetch(
-          // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
           `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
         );
+
+        // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         const data = await response.json();
         setDetailData(data.items);
         setRenderedData(data.items.slice(0, itemCount));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+      setIsLoading(false);
+      setIsError(false);
     };
     fetchData();
   }, []);
@@ -60,6 +71,9 @@ function DetailPage() {
   useEffect(() => {
     setRenderedData(detailData.slice(0, itemCount));
   }, [detailData, itemCount]);
+
+  if (isLoading) return <Spinner />;
+  if (isError) return <ErrorPage />;
 
   return (
     <>
@@ -87,6 +101,7 @@ function DetailPage() {
                 </dl>
               </ContentDetail>
             </VideoContent>
+            <CommentItem></CommentItem>
           </MainBox>
           <ScrollBox onScroll={handleScroll}>
             {renderedData &&
