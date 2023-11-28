@@ -44,7 +44,8 @@ function DetailPage() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+          // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+          `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
         );
         const data = await response.json();
         setDetailData(data.items);
