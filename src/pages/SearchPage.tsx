@@ -34,7 +34,8 @@ const ListItem = styled.li`
   max-height: fit-content;
   overflow: hidden;
   padding: 1rem;
-  border: 1px solid var(--button-hover-color);
+  border: 0.0625rem solid var(--button-hover-color);
+  color: var(--darkmode-color);
 `;
 
 const NoDataList = styled.p`
