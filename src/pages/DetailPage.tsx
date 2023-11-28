@@ -2,19 +2,20 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import CommentItem from '@/components/CommentItem';
 
 function DetailPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
-  const [detailData, setDetailData] = useState([]);
+  const [detailData, setDetailData] = useState([]); 
   const { snippet } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
-  );
+    );
   const [renderedData, setRenderedData] = useState([]);
   const [itemCount, setItemCount] = useState(10);
-
+ 
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
     console.log('Scroll event fired');
@@ -88,6 +89,7 @@ function DetailPage() {
                 </dl>
               </ContentDetail>
             </VideoContent>
+              <CommentItem></CommentItem>
           </MainBox>
           <ScrollBox onScroll={handleScroll}>
             {renderedData &&
