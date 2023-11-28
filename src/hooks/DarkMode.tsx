@@ -1,19 +1,25 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import HeaderButton from '@/components/HeaderButton';
 
 interface DarkModeProps {
   src: string;
-  handleEvent: () => void;
 }
 
-function DarkMode({ src, handleEvent }: DarkModeProps) {
+function DarkMode({ src }: DarkModeProps) {
+  const dispatch = useDispatch();
+
+  const handleDarkModeToggle = () => {
+    dispatch({ type: 'TOGGLE_THEME' });
+  };
+
   return (
     <HeaderButton
       buttonClass="darkmodeButton "
       src={src}
       title="다크모드"
       imgClass="darkMode"
-      onClick={handleEvent}
+      onClick={handleDarkModeToggle}
     ></HeaderButton>
   );
 }
