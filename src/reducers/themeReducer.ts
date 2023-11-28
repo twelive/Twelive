@@ -1,5 +1,6 @@
 const initialState: ThemeState = {
-  darkMode: false,
+  darkMode: JSON.parse(localStorage.getItem("darkMode") || "false"),
+//.
 };
 
 const themeReducer = (
@@ -7,8 +8,12 @@ const themeReducer = (
   action: ThemeAction
 ): ThemeState => {
   switch (action.type) {
-    case 'TOGGLE_THEME':
-      return { darkMode: !state.darkMode };
+    case 'TOGGLE_THEME': {
+      const newDarkMode = !state.darkMode;
+      localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
+      return { darkMode: newDarkMode };
+
+    }
     default:
       return state;
   }

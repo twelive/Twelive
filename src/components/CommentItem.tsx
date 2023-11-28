@@ -151,32 +151,35 @@ function CommentItem () {
 
                       
                   </CommentFormArea>
+                  <CommentListWrapper>
                   {comments.map((comment) => (
                    
              
-    <CommentList key={comment.id}>
-      <CommenterBox>
-
-      <Commenter src={profile}></Commenter>       
-      {comment.id === editingCommentId ? (
-        <EditInput
-          key={comment.id}
-          type="text"
-          value={newCommentText}
-          onChange={(e) => setNewCommentText(e.target.value)}
-        />
-      ) : (
-        <CommentText key={comment.id}>{comment.text}</CommentText>
-      )}
-      </CommenterBox>
-      <CommentButtonContainer>
-        <UpdatedAt>{comment.created_at.slice(2,10)}</UpdatedAt>
-      <CommentEdit onClick={()=>handleEdit(comment.id)}><CommentButtonText>수정</CommentButtonText></CommentEdit>
-      <CommentDelete onClick={() => handleDelete(comment.id)}><CommentButtonText>삭제</CommentButtonText></CommentDelete>
-      </CommentButtonContainer>
-
-    </CommentList>
-  ))}
+                   <CommentList key={comment.id}>
+                     <CommenterBox>
+               
+                     <Commenter src={profile}></Commenter>       
+                     {comment.id === editingCommentId ? (
+                       <EditInput
+                         key={comment.id}
+                         type="text"
+                         value={newCommentText}
+                         onChange={(e) => setNewCommentText(e.target.value)}
+                       />
+                     ) : (
+                       <CommentText key={comment.id}>{comment.text}</CommentText>
+                     )}
+                     </CommenterBox>
+                     <CommentButtonContainer>
+                       <UpdatedAt>{comment.created_at.slice(2,10)}</UpdatedAt>
+                     <CommentEdit onClick={()=>handleEdit(comment.id)}><CommentButtonText>수정</CommentButtonText></CommentEdit>
+                     <CommentDelete onClick={() => handleDelete(comment.id)}><CommentButtonText>삭제</CommentButtonText></CommentDelete>
+                     </CommentButtonContainer>
+               
+                   </CommentList>
+                 ))}
+                  </CommentListWrapper>
+                  
 
                 </CommentAdd>
               </CommentWrapper>
@@ -255,6 +258,7 @@ display: flex;
   vertical-align: middle;
   justify-content: space-between;
   padding-top: 15px;
+  margin-bottom: 20px;
   
 `;
 const CommentForm = styled.form `
@@ -298,7 +302,6 @@ background-color: var(--darkmode-bgColor);
 const CommentList = styled.li `
 background-color: #a3a3a33e;
 margin: 5px;
-margin-top: 20px;
 margin-bottom: 20px;
 
 border-radius: 10px;
@@ -372,6 +375,7 @@ const UpdatedAt = styled.p `
 `;
 
 const EditInput = styled.input `
+
 background-color: transparent;
 border: 0.1px solid var(--button-border-color);
 color: var(--darkmode-color);
@@ -379,4 +383,35 @@ width: 100%;
 margin-left: 25px;
 margin-right: 25px;
 margin-bottom: 15px;
+`;
+
+const CommentListWrapper = styled.div `
+  width: 100%;
+  height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 15px;
+
+  &::-webkit-scrollbar {
+    width: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--button-hover-color);
+    border-radius: var(--primary-margin);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(4, 90, 220, 0.1);
+    border-radius: var(--primary-margin);
+    margin-top: 0.625rem;
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    height: calc(100vh - 400px);
+  }
+  @media ${(props) => props.theme.laptop} {
+    overflow-y: visible;
+    
+  }
+
 `;
