@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CommentItem from '@/components/CommentItem';
+import Spinner from '@/components/Spinner';
 
 function DetailPage() {
   const dispatch = useDispatch();
@@ -12,15 +13,14 @@ function DetailPage() {
   const [detailData, setDetailData] = useState([]); 
   const { snippet } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
-    );
+  );
+  const [isLoading, setIsLoading] = useState(false);
   const [renderedData, setRenderedData] = useState([]);
   const [itemCount, setItemCount] = useState(10);
  
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
-    console.log('Scroll event fired');
     if (scrollHeight - Math.ceil(scrollTop) <= clientHeight) {
-      console.log('Load more data');
       setItemCount((prevCount) => prevCount + 10);
     }
   }, []);
@@ -45,16 +45,20 @@ function DetailPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(
           `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
         );
+
+        // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         const data = await response.json();
         setDetailData(data.items);
         setRenderedData(data.items.slice(0, itemCount));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -62,6 +66,8 @@ function DetailPage() {
   useEffect(() => {
     setRenderedData(detailData.slice(0, itemCount));
   }, [detailData, itemCount]);
+
+  if (isLoading) return <Spinner />;
 
   return (
     <>

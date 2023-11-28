@@ -1,5 +1,7 @@
 const initialState: DataState = {
-  data: {},
+  data: {
+    items: [],
+  },
 };
 
 function dataReducer(state: DataState = initialState, action: DataAction) {
@@ -7,7 +9,10 @@ function dataReducer(state: DataState = initialState, action: DataAction) {
     case 'DATA_FETCH': {
       return {
         ...state,
-        data: action.payload,
+        data: {
+          ...state.data,
+          items: action.payload,
+        },
       };
     }
     default:
