@@ -17,7 +17,7 @@ import mic from '@assets/common-mic.svg';
 import whitemic from '@assets/common-whitemic.svg';
 import blacksun from '@assets/common-blacksun.svg';
 import whitemoon from '@assets/common-whitemoon.svg';
-
+.
 function Header(): ReactElement {
   const dispatch = useDispatch();
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
