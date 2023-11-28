@@ -21,7 +21,7 @@ function SearchPage() {
           ))}
         </>
       ) : (
-        <NoDataList>검색 기록이 없습니다.</NoDataList>
+        <SearchHistory>검색 기록이 없습니다.</SearchHistory>
       )}
     </ul>
   );
@@ -38,7 +38,8 @@ const ListItem = styled.li`
   color: var(--darkmode-color);
 `;
 
-const NoDataList = styled.p`
+const SearchHistory = styled.p`
   margin-top: 1rem;
   text-align: center;
+  color: var(--darkmode-color);
 `;
