@@ -46,6 +46,11 @@ const StyledLink = styled(Link)`
   &.homelogo {
     height: 2.5rem;
   }
+
+  &.searchButton {
+    width: 2.1875rem;
+    height: 2.1875rem;
+  }
 `;
 
 const Button = styled.button`
