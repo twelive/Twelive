@@ -6,6 +6,10 @@ interface NavState {
   navMenu: string;
 }
 
+interface SearchState {
+  searchValue: string;
+}
+
 interface ToggleState {
   toggleMenu: boolean;
 }
@@ -26,6 +30,11 @@ interface ThemeState {
 type NavAction = {
   type: 'NAV_CLICK';
   payload?: string;
+};
+
+type SearchAction = {
+  type: 'SEARCH_INPUT';
+  value?: string;
 };
 
 type ToggleAction = {

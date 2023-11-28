@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RootLayout from '@/RootLayout';
 import MainListPage from '@pages/MainListPage';
 import DetailPage from '@pages/DetailPage';
+import SearchPage from '@pages/SearchPage';
 import ErrorPage from '@pages/ErrorPage';
 
 const Router = () => {
@@ -12,6 +13,7 @@ const Router = () => {
         <Route element={<RootLayout />}>
           <Route path="/" element={<MainListPage />} />
           <Route path="/detail/:detailId" element={<DetailPage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
