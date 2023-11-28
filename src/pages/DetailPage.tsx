@@ -11,7 +11,7 @@ function DetailPage() {
   const navigate = useNavigate();
   const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
-  const [detailData, setDetailData] = useState([]); 
+  const [detailData, setDetailData] = useState([]);
   const { snippet } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
   );
@@ -101,7 +101,7 @@ function DetailPage() {
                 </dl>
               </ContentDetail>
             </VideoContent>
-              <CommentItem></CommentItem>
+            <CommentItem></CommentItem>
           </MainBox>
           <ScrollBox onScroll={handleScroll}>
             {renderedData &&
