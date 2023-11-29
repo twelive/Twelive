@@ -53,9 +53,9 @@ function DetailPage() {
       try {
         const response = await fetch(
           `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
+          // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         );
 
-        // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         const data = await response.json();
         setDetailData(data.items);
         setRenderedData(data.items.slice(0, itemCount));
@@ -218,6 +218,10 @@ const ScrollBox = styled.div`
 
   @media ${(props) => props.theme.tablet} {
     height: calc(100vh - 400px);
+  }
+
+  @media ${(props) => props.theme.laptop} {
+    height: calc(100vh - 10px);
   }
 `;
 
