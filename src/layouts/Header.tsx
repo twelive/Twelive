@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -27,7 +27,7 @@ import HeaderBackButton from '@/hooks/HeaderBackButton';
 function Header(): ReactElement {
   const dispatch = useDispatch();
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
-  const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  // const { searchValue } = useSelector((state: RootState) => state.searchValue);
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -71,43 +71,37 @@ function Header(): ReactElement {
 
   const currentImages = darkMode ? images.darkMode : images.lightMode;
 
-  const handleDarkModeToggle = () => {
-    dispatch({ type: 'TOGGLE_THEME' });
-  };
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
-    console.log(searchValue);
+    dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
   };
 
   return (
-    <HeadBar>
-      <Div className="buttonContainer containerOption">
-        {isMobile && (
-          <>
+    <>
+      {isMobile && (
+        <HeadBar>
+          <HeaderLayout>
             {pathname === '/search' ? (
-              <>
+              <SearchMobileContainer>
                 <HeaderBackButton src={currentImages.back} />
-                <Div className="searchMobileContainer containerOption">
+                <SearchContainer $justifyCenter>
                   <form
                     id="form"
                     name="form"
                     action="/videos/popular.json"
                     method="GET"
                   >
-                    <div className="search-wrapper">
-                      <fieldset className="search">
-                        <input
-                          type="text"
-                          className="searchTxt"
-                          name="searchTxt"
-                          title="영상검색"
-                          placeholder="검색"
-                          onChange={handleSearch}
-                        />
-                      </fieldset>
-                    </div>
+                    <fieldset className="search">
+                      <input
+                        type="text"
+                        className="searchTxt"
+                        name="searchTxt"
+                        title="영상검색"
+                        placeholder="검색"
+                        onChange={handleSearch}
+                      />
+                    </fieldset>
                   </form>
                   <HeaderButton
                     buttonClass="searchButton searchOption"
@@ -115,16 +109,13 @@ function Header(): ReactElement {
                     title="영상검색"
                     type="submit"
                   ></HeaderButton>
-                </Div>
-                <DarkMode
-                  src={currentImages.darkModeButton}
-                  handleEvent={handleDarkModeToggle}
-                />
-              </>
+                </SearchContainer>
+                <DarkMode src={currentImages.darkModeButton} />
+              </SearchMobileContainer>
             ) : (
               <>
                 <HomeLogo src={currentImages.logo} />
-                <Div className="containerOption">
+                <Layout>
                   <SearchButton src={currentImages.search} isLink={true} />
                   <HeaderButton
                     buttonClass="loginButton"
@@ -132,39 +123,37 @@ function Header(): ReactElement {
                     imgClass="mobileImg"
                     title="사용자 "
                   ></HeaderButton>
-                  <DarkMode
-                    src={currentImages.darkModeButton}
-                    handleEvent={handleDarkModeToggle}
-                  />
-                </Div>
+                  <DarkMode src={currentImages.darkModeButton} />
+                </Layout>
               </>
             )}
-          </>
-        )}
-
-        {(isLaptop || isDesktop) && (
-          <>
-            {/* 메뉴바, 홈 */}
-            <Div className="leftContainer containerOption">
-              <HeaderButton
-                buttonClass="hamburgerButton arrayOption"
-                imgClass="hamburger"
-                src={currentImages.menu}
-                title="상세 메뉴"
-                onClick={handleToggle}
-              ></HeaderButton>
-              <HomeLogo src={currentImages.logo} />
-            </Div>
-            {/* 검색영역 */}
-            <Div className="searchWrapper containerOption">
-              <Div className="searchContainer containerOption">
-                <form
-                  id="form"
-                  name="form"
-                  action="/videos/popular.json"
-                  method="GET"
-                >
-                  <div className="search-wrapper">
+          </HeaderLayout>
+        </HeadBar>
+      )}
+      {(isLaptop || isDesktop) && (
+        <HeadBar>
+          <HeaderLayout>
+            <>
+              {/* 메뉴바, 홈 */}
+              <LeftContainer>
+                <HeaderButton
+                  buttonClass="hamburgerButton arrayOption"
+                  imgClass="hamburger"
+                  src={currentImages.menu}
+                  title="상세 메뉴"
+                  onClick={handleToggle}
+                ></HeaderButton>
+                <HomeLogo src={currentImages.logo} />
+              </LeftContainer>
+              {/* 검색영역 */}
+              <SearchBox $justifyCenter>
+                <SearchContainer $justifyCenter>
+                  <form
+                    id="form"
+                    name="form"
+                    action="/videos/popular.json"
+                    method="GET"
+                  >
                     <fieldset className="search">
                       <input
                         type="text"
@@ -174,42 +163,37 @@ function Header(): ReactElement {
                         placeholder="검색"
                       />
                     </fieldset>
-                  </div>
-                </form>
+                  </form>
+                  <HeaderButton
+                    buttonClass="searchButton searchOption"
+                    src={search}
+                    title="영상검색"
+                    type="submit"
+                  ></HeaderButton>
+                </SearchContainer>
                 <HeaderButton
-                  buttonClass="searchButton searchOption"
-                  src={search}
-                  title="영상검색"
-                  type="submit"
+                  buttonClass="micButton"
+                  src={currentImages.mic}
+                  title="음성검색"
                 ></HeaderButton>
-              </Div>
-              <HeaderButton
-                buttonClass="micButton"
-                src={currentImages.mic}
-                title="음성검색"
-              ></HeaderButton>
-            </Div>
-            {/* 사용자 영역, 다크모드 */}
-            <Div className="rightContainer containerOption">
-              <HeaderButton
-                buttonClass="loginButton arrayOption roundedOption"
-                src={currentImages.login}
-                imgClass="loginImg"
-                title="사용자"
-              >
-                <Div className="login containerOption">
-                  <span className="loginText">로그인</span>
-                </Div>
-              </HeaderButton>
-              <DarkMode
-                src={currentImages.darkModeButton}
-                handleEvent={handleDarkModeToggle}
-              />
-            </Div>
-          </>
-        )}
-      </Div>
-    </HeadBar>
+              </SearchBox>
+              {/* 사용자 영역, 다크모드 */}
+              <Layout>
+                <HeaderButton
+                  buttonClass="loginButton arrayOption roundedOption"
+                  src={currentImages.login}
+                  imgClass="loginImg"
+                  title="사용자"
+                >
+                  <LoginBox $justifyCenter>로그인</LoginBox>
+                </HeaderButton>
+                <DarkMode src={currentImages.darkModeButton} />
+              </Layout>
+            </>
+          </HeaderLayout>
+        </HeadBar>
+      )}
+    </>
   );
 }
 
@@ -224,55 +208,48 @@ const HeadBar = styled.header`
   z-index: 1;
 `;
 
-const Div = styled.div`
-  &.containerOption {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-  &.leftContainer {
-    justify-content: space-between;
-    vertical-align: middle;
-  }
-  &.buttonContainer {
-    justify-content: space-between;
-  }
-  &.searchMobileContainer {
-    justify-content: center;
-    right: 0;
-    input {
-      box-sizing: border-box;
-      height: 2.1875rem;
-      border: 0.05rem solid var(--button-border-color);
-      border-radius: 1.25rem 0 0 1.25rem;
-      padding: 0.5rem;
+const Layout = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const HeaderLayout = styled(Layout)<{ $justifyCenter?: boolean }>`
+  justify-content: ${(props) =>
+    props.$justifyCenter ? 'center' : 'space-between'};
+`;
+
+const SearchMobileContainer = styled(HeaderLayout)`
+  width: 100%;
+  padding-top: 0.25rem;
+`;
+
+const LeftContainer = styled(HeaderLayout)`
+  vertical-align: middle;
+`;
+
+const SearchBox = styled(HeaderLayout)`
+  min-width: 60%;
+`;
+
+const SearchContainer = styled(HeaderLayout)`
+  right: 0;
+
+  input {
+    box-sizing: border-box;
+    height: 2.1875rem;
+    padding: 0.5rem;
+    border: 0.05rem solid var(--button-border-color);
+    border-radius: 1.25rem 0 0 1.25rem;
+
+    @media ${(props) => props.theme.tablet} {
+      width: 21.875rem;
+    }
+    @media ${(props) => props.theme.laptop} {
+      width: 31.25rem;
     }
   }
-  &.searchContainer {
-    justify-content: center;
-    right: 0;
-    input {
-      box-sizing: border-box;
-      border: 0.05rem solid var(--button-border-color);
-      border-radius: 1.25rem 0 0 1.25rem;
-      padding: 0.5rem;
-      height: 2.1875rem;
+`;
 
-      @media ${(props) => props.theme.tablet} {
-        width: 21.875rem;
-      }
-      @media ${(props) => props.theme.laptop} {
-        width: 31.25rem;
-      }
-    }
-  }
-
-  &.searchWrapper {
-    justify-content: center;
-    min-width: 60%;
-  }
-  &.login {
-    justify-content: center;
-    color: var(--darkmode-color);
-  }
+const LoginBox = styled(HeaderLayout)`
+  color: var(--darkmode-color);
 `;

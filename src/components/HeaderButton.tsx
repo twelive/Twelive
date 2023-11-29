@@ -61,16 +61,15 @@ const Button = styled.button`
   cursor: pointer;
   &.arrayOption {
     display: flex;
-    flex-direction: row;
     vertical-align: middle;
     align-items: center;
   }
   &.hamburgerButton {
-    width: 35px;
-    height: 35px;
+    width: 2.1875rem;
+    height: 2.1875rem;
   }
   &.darkmodeButton {
-    margin-top: 3px;
+    margin-top: 0.1875rem;
     margin-right: 0.75rem;
 
     height: 2.1875rem;
@@ -137,19 +136,17 @@ const Img = styled.img`
     height: 2.5rem;
   }
   &.hamburger {
-    /* height: 35px;
-  width: 35px; */
-    padding: 5px;
+    padding: 0.3125rem;
     border-radius: 100%;
     width: 1.5rem;
-    margin-right: 15px;
+    margin-right: 0.9375rem;
     &:hover {
       background-color: ${(props) => props.theme.hoverColor};
     }
   }
 
   &.mobileImg {
-    padding: 5px;
+    padding: 0.3125rem;
     border-radius: 100%;
     &:hover {
       background-color: var(--button-hover-color);
@@ -157,7 +154,7 @@ const Img = styled.img`
   }
 
   &.darkMode {
-    width: 22px;
-    height: 22px;
+    width: 1.375rem;
+    height: 1.375rem;
   }
 `;
