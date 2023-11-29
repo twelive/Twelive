@@ -5,7 +5,6 @@ function Spinner() {
   return (
     <ImgBox>
       <Img src={Loading} alt="잠시만 기다려 주세요." />
-      <div>잠시만 기다려 주세요.</div>
     </ImgBox>
   );
 }
