@@ -47,12 +47,12 @@ function Search() {
           <>
             {filterValue.map((item: VideoItem) => (
               <ListItem key={item.id}>
-                <Link
+                <StyledLink
                   to={`/detail/${item.snippet.channelId}`}
                   onClick={handleClick}
                 >
                   {item.snippet.title}
-                </Link>
+                </StyledLink>
               </ListItem>
             ))}
           </>
@@ -100,7 +100,11 @@ const ListItem = styled.li`
   overflow: hidden;
   padding: 1rem;
   border: 0.0625rem solid var(--button-hover-color);
+`;
+
+const StyledLink = styled(Link)`
   color: var(--darkmode-color);
+  /* text-decoration: none; */
 `;
 
 const SearchHistory = styled.p`
