@@ -46,7 +46,7 @@ type SearchAction = {
 };
 
 type SearchHistoryAction = {
-  type: 'SEARCHHISTORY_UPDATE';
+  type: 'SEARCHHISTORY_ADD';
   value?: string;
 };
 

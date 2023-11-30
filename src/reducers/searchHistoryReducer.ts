@@ -10,7 +10,7 @@ function searchHistoryReducer(
   action: SearchHistoryAction
 ) {
   switch (action.type) {
-    case 'SEARCHHISTORY_UPDATE': {
+    case 'SEARCHHISTORY_ADD': {
       localStorage.setItem(
         'searchHistory',
         JSON.stringify([...state.searchHistoryValue, action.value])
