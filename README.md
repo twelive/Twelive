@@ -83,12 +83,12 @@ $ npm install @supabase/supabase-js
 ### Development
 
 ![createreactapp](https://img.shields.io/badge/createreactapp-09D3AC?style=for-the-badge&logo=createreactapp&logoColor=white)
-![ESlint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white)
-![prettier](https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white) <br>
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white)
+![ESlint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white)
+![prettier](https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white) <br>
 ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white)
-![styledcomponents](https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white) <br>
+![styledcomponents](https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white)
 ![reactrouter](https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 ![FramerMotion](https://img.shields.io/badge/Framer-0055FF?style=for-the-badge&logo=Framer&logoColor=white)
 
@@ -109,13 +109,13 @@ $ npm install @supabase/supabase-js
 
 ## ⚙️ 주요 기능
 
-- [메뉴바 - 호버 라이트/다크모드](#메뉴바---호버-라이트다크모드) <br>
-- [전체 페이지 - 다크모드](#전체-페이지---다크모드) <br>
-- [메인/검색 페이지 - 검색기능](#메인검색-페이지---검색기능) <br>
-- [썸네일 애니메이션](#썸네일-애니메이션) <br>
-- [디테일페이지 - 반응형 모바일](#디테일-페이지---반응형-모바일) <br>
-- [디테일페이지- 관련 영상 리스트 스크롤](#디테일페이지--관련-영상-리스트-스크롤) <br>
-- [디테일페이지 - 댓글기능](#디테일페이지---댓글기능) <br>
+- 메뉴바 - 호버 라이트/다크모드 <br>
+- 전체 페이지 - 다크모드 <br>
+- 메인/검색 페이지 - 검색기능 <br>
+- 썸네일 애니메이션 <br>
+- 디테일페이지 - 반응형 모바일 <br>
+- 디테일페이지- 관련 영상 리스트 스크롤 <br>
+- 디테일페이지 - 댓글기능 <br>
 
 ## 1. 메인 페이지
 
@@ -131,10 +131,10 @@ $ npm install @supabase/supabase-js
 
 ### 메인/검색 페이지 - 검색기능 <br>
 
-Desktop
+1. Desktop
 ![Laptop_-Desktop_-SearchComponent](https://github.com/twelive/final-project/assets/117728530/cd268f74-cb52-48c5-86cb-44732fa604e9)
 
-(Mobile)
+2. (Mobile) <br>
 ![Mobile_-SearchPage](https://github.com/twelive/final-project/assets/117728530/73285972-f336-4a25-b068-185d9952a307)
 
 ### 썸네일 애니메이션 <br>
