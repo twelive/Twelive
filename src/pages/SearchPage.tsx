@@ -25,15 +25,15 @@ function SearchPage() {
         </>
       ) : (
         <>
-          {searchHistoryValue ? (
+          {/* {searchHistoryValue ? (
             <>
               {searchHistoryValue.map((item: VideoItem) => (
                 <ListItem key={item.id}>{item.snippet.title}</ListItem>
               ))}
             </>
-          ) : (
-            <SearchHistory>검색 기록이 없습니다.</SearchHistory>
-          )}
+          ) : ( */}
+          <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+          {/*   )} */}
         </>
       )}
     </ul>

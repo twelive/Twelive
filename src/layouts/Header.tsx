@@ -1,9 +1,13 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
+
+import Search from '@components/Search';
+import DarkMode from '@hooks/DarkMode';
 import HeaderButton from '@components/HeaderButton';
+import HeaderBackButton from '@/hooks/HeaderBackButton';
 import HomeLogo from '@hooks/HomeLogo';
 import SearchButton from '@/hooks/SearchButton';
 
@@ -21,8 +25,6 @@ import mic from '@assets/common-mic.svg';
 import whitemic from '@assets/common-whitemic.svg';
 import blacksun from '@assets/common-blacksun.svg';
 import whitemoon from '@assets/common-whitemoon.svg';
-import DarkMode from '@hooks/DarkMode';
-import HeaderBackButton from '@/hooks/HeaderBackButton';
 
 function Header(): ReactElement {
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ function Header(): ReactElement {
 
   const location = useLocation();
   const pathname = location.pathname;
+
+  const [isInput, setIsInput] = useState(false);
 
   const isMobile = useMediaQuery({
     query: '(min-width : 20rem) and (max-width : 47.9375rem)',
@@ -72,9 +76,13 @@ function Header(): ReactElement {
   const currentImages = darkMode ? images.darkMode : images.lightMode;
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
     dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
+  };
+
+  const handleInput = () => {
+    console.log('input 클릭');
+    setIsInput(!isInput);
   };
 
   return (
@@ -161,6 +169,8 @@ function Header(): ReactElement {
                         name="searchTxt"
                         title="영상검색"
                         placeholder="검색"
+                        onClick={handleInput}
+                        onChange={handleSearch}
                       />
                     </fieldset>
                   </form>
@@ -177,6 +187,7 @@ function Header(): ReactElement {
                   title="음성검색"
                 ></HeaderButton>
               </SearchBox>
+              {isInput && <Search />}
               {/* 사용자 영역, 다크모드 */}
               <Layout>
                 <HeaderButton
