@@ -128,6 +128,7 @@ function CommentItem() {
                 placeholder="댓글 내용을 입력해주세요."
                 name="content"
                 required
+                autoComplete="off"
                 ref={commentInputRef}
               />
             </CommentForm>
@@ -145,6 +146,7 @@ function CommentItem() {
                       key={comment.id}
                       type="text"
                       value={newCommentText}
+                      autoComplete="off"
                       onChange={(e) => setNewCommentText(e.target.value)}
                     />
                   ) : (
