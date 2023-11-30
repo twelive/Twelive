@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -29,13 +29,11 @@ import whitemoon from '@assets/common-whitemoon.svg';
 function Header(): ReactElement {
   const dispatch = useDispatch();
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
+  const { inputValue } = useSelector((state: RootState) => state.inputValue);
   // const { searchValue } = useSelector((state: RootState) => state.searchValue);
 
   const location = useLocation();
   const pathname = location.pathname;
-
-  const [isInput, setIsInput] = useState(false);
-  const outside = useRef<HTMLDivElement | null>(null);
 
   const isMobile = useMediaQuery({
     query: '(min-width : 20rem) and (max-width : 47.9375rem)',
@@ -46,10 +44,6 @@ function Header(): ReactElement {
   const isDesktop = useMediaQuery({
     query: '(min-width : 63.1875rem) and (max-width : 120rem)',
   });
-
-  const handleToggle = () => {
-    dispatch({ type: 'TOGGLE_CLICK', value: toggleMenu });
-  };
 
   const images = {
     darkMode: {
@@ -73,21 +67,20 @@ function Header(): ReactElement {
   };
 
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
-
   const currentImages = darkMode ? images.darkMode : images.lightMode;
 
+  const handleToggle = () => {
+    dispatch({ type: 'TOGGLE_CLICK', value: toggleMenu });
+  };
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsInput(true);
+    dispatch({ type: 'INPUT_TOGGLE', value: true });
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
     dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
   };
 
-  const handleInput = () => {
-    setIsInput(!isInput);
-  };
-
   return (
-    <>
+    <div>
       {isMobile && (
         <HeadBar>
           <HeaderLayout>
@@ -108,6 +101,7 @@ function Header(): ReactElement {
                         name="searchTxt"
                         title="영상검색"
                         placeholder="검색"
+                        autoComplete="off"
                         onChange={handleSearch}
                       />
                     </fieldset>
@@ -156,10 +150,10 @@ function Header(): ReactElement {
               </LeftContainer>
               {/* 검색영역 */}
               <SearchBox
-                ref={outside}
-                onClick={(e) => {
-                  if (e.target == outside.current) setIsInput(false);
-                }}
+                // ref={outside}
+                // onClick={(e) => {
+                //   if (e.target == outside.current) setIsInput(false);
+                // }}
                 $justifyCenter
               >
                 <SearchContainer $justifyCenter>
@@ -176,7 +170,7 @@ function Header(): ReactElement {
                         name="searchTxt"
                         title="영상검색"
                         placeholder="검색"
-                        onClick={handleInput}
+                        autoComplete="off"
                         onChange={handleSearch}
                       />
                     </fieldset>
@@ -194,7 +188,7 @@ function Header(): ReactElement {
                   title="음성검색"
                 ></HeaderButton>
               </SearchBox>
-              {isInput && <Search />}
+              {inputValue && <Search />}
               {/* 사용자 영역, 다크모드 */}
               <Layout>
                 <HeaderButton
@@ -211,7 +205,7 @@ function Header(): ReactElement {
           </HeaderLayout>
         </HeadBar>
       )}
-    </>
+    </div>
   );
 }
 

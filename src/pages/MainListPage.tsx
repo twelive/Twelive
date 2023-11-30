@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { motion } from 'framer-motion';
-import Spinner from '@/components/Spinner';
-import ErrorPage from './ErrorPage';
+
+import Spinner from '@components/Spinner';
+import ErrorPage from '@pages/ErrorPage';
 
 function MainListPage() {
   const navigate = useNavigate();
