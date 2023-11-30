@@ -10,7 +10,7 @@ function searchReducer(
     case 'SEARCH_INPUT': {
       return {
         ...state,
-        searchValue: action.value,
+        searchValue: action.value || '',
       };
     }
     default:
