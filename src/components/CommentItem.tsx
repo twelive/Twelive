@@ -2,7 +2,7 @@ import { TABLE_NAME, supabase } from '@/client';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import profile from '../assets/장원영쟝.jpg';
+import profile from '../assets/profile.jpg';
 import sort from '../assets/detail-sort.svg';
 import whitesort from '../assets/detail-whitesort.svg';
 
