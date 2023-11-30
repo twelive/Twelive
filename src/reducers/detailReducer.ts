@@ -1,5 +1,9 @@
+const storedChannelId = localStorage.getItem('channelId');
+
+const channelId = storedChannelId ? JSON.parse(storedChannelId) : '';
+
 const initialState: DetailState = {
-  channelId: '',
+  channelId: channelId || '',
 };
 
 function detailReducer(
@@ -8,6 +12,7 @@ function detailReducer(
 ) {
   switch (action.type) {
     case 'CHANNELID_UPDATE': {
+      localStorage.setItem('channelId', JSON.stringify(action.update));
       return {
         ...state,
         channelId: action.update,
