@@ -155,73 +155,12 @@ Desktop
 ```
 📦src
  ┣ 📂assets
- ┃ ┣ 📜common-arrow-left.svg
- ┃ ┣ 📜common-blacksun.svg
- ┃ ┣ 📜common-channel.svg
- ┃ ┣ 📜common-educate.svg
- ┃ ┣ 📜common-feedback.svg
- ┃ ┣ 📜common-game.svg
- ┃ ┣ 📜common-history.svg
- ┃ ┣ 📜common-home-click.svg
- ┃ ┣ 📜common-home.svg
- ┃ ┣ 📜common-keyboard.svg
- ┃ ┣ 📜common-live.svg
- ┃ ┣ 📜common-login.svg
- ┃ ┣ 📜common-logo.svg
- ┃ ┣ 📜common-me-click.svg
- ┃ ┣ 📜common-menu.svg
- ┃ ┣ 📜common-mic.svg
- ┃ ┣ 📜common-movie.svg
- ┃ ┣ 📜common-music.svg
- ┃ ┣ 📜common-playlist.svg
- ┃ ┣ 📜common-podcast.svg
- ┃ ┣ 📜common-rank.svg
- ┃ ┣ 📜common-search.svg
- ┃ ┣ 📜common-service.svg
- ┃ ┣ 📜common-setting.svg
- ┃ ┣ 📜common-shopping.svg
- ┃ ┣ 📜common-shorts-click.svg
- ┃ ┣ 📜common-shorts.svg
- ┃ ┣ 📜common-spinner.svg
- ┃ ┣ 📜common-sports.svg
- ┃ ┣ 📜common-subscribe-click.svg
- ┃ ┣ 📜common-subscribe.svg
- ┃ ┣ 📜common-whitearrow-left.svg
- ┃ ┣ 📜common-whiteeducate.svg
- ┃ ┣ 📜common-whitefeedback.svg
- ┃ ┣ 📜common-whitegame.svg
- ┃ ┣ 📜common-whitehistory.svg
- ┃ ┣ 📜common-whitehome.svg
- ┃ ┣ 📜common-whitelive.svg
- ┃ ┣ 📜common-whitelogin.svg
- ┃ ┣ 📜common-whitemainlogo.svg
- ┃ ┣ 📜common-whiteme.svg
- ┃ ┣ 📜common-whitemenu.svg
- ┃ ┣ 📜common-whitemic.svg
- ┃ ┣ 📜common-whitemoon.svg
- ┃ ┣ 📜common-whitemovie.svg
- ┃ ┣ 📜common-whitemusic.svg
- ┃ ┣ 📜common-whiteplaylist.svg
- ┃ ┣ 📜common-whitepodcast.svg
- ┃ ┣ 📜common-whiterank.svg
- ┃ ┣ 📜common-whitesearch.svg
- ┃ ┣ 📜common-whiteshopping.svg
- ┃ ┣ 📜common-whiteshorts.svg
- ┃ ┣ 📜common-whitesports.svg
- ┃ ┣ 📜common-whitesubscribe.svg
- ┃ ┣ 📜common-yellowsun.svg
- ┃ ┣ 📜detail-add.svg
- ┃ ┣ 📜detail-dislike.svg
- ┃ ┣ 📜detail-like.svg
- ┃ ┣ 📜detail-more.svg
- ┃ ┣ 📜detail-share.svg
- ┃ ┣ 📜detail-sort.svg
- ┃ ┣ 📜detail-subscribed.svg
- ┃ ┣ 📜detail-whitesort.svg
+ ┃ ┣ 📜common-*.svg
+ ┃ ┣ 📜detail-*.svg
  ┃ ┗ 📜profile.jpg
  ┣ 📂components
  ┃ ┣ 📜CommentItem.tsx
- ┃ ┣ 📜HeaderButton.tsx
+ ┃ ┣ 📜HeaderButton.tsx 
  ┃ ┣ 📜NavButton.tsx
  ┃ ┗ 📜Spinner.tsx
  ┣ 📂hooks
@@ -278,14 +217,14 @@ Desktop
 
 ## 👨‍💻👩‍💻 Support 연락 경로(E-mail , Github)
 
-- 정소이 :ingbinsee@gmail.com</br>
+- 정소이 :soie1010@naver.com</br>
   https://github.com/uniS2
 
-- 서진만 : juicy_joji@yu.ac.kr</br>
+- 서진만 : dirnrhd21@naver.com</br>
   https://github.com/seojinman</br>
 
-- 신명화 :dudgirl135@naver.com</br>
+- 신명화 :shinmyounghwa92@gmail.com</br>
   https://github.com/MyoungHwaShin</br>
 
-- 전선용 : dirnrhd21@naver.com</br>
+- 전선용 : sunyong0725@naver.com</br>
   https://github.com/sy0725
