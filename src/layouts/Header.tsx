@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -31,6 +31,7 @@ function Header(): ReactElement {
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
   const { inputValue } = useSelector((state: RootState) => state.inputValue);
   // const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -77,11 +78,14 @@ function Header(): ReactElement {
     dispatch({ type: 'INPUT_TOGGLE', value: true });
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
     dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
-
-    if (!e.target.value) {
-      e.target.value = '';
-    }
   };
+
+  useEffect(() => {
+    if (!inputValue && inputRef.current) {
+      inputRef.current.value = '';
+      dispatch({ type: 'SEARCH_INPUT', value: '' });
+    }
+  }, [inputValue, inputRef]);
 
   return (
     <div>
@@ -176,6 +180,7 @@ function Header(): ReactElement {
                         placeholder="검색"
                         autoComplete="off"
                         onChange={handleSearch}
+                        ref={inputRef}
                       />
                     </fieldset>
                   </form>
@@ -249,6 +254,12 @@ const SearchBox = styled(HeaderLayout)`
 
 const SearchContainer = styled(HeaderLayout)`
   right: 0;
+
+  input {
+    @media ${(props) => props.theme.mobile} {
+      width: 50vw;
+    }
+  }
 
   input {
     box-sizing: border-box;
