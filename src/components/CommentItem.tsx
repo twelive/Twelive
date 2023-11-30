@@ -337,8 +337,8 @@ const EditInput = styled.input`
 
 const CommentListWrapper = styled.div`
   width: 100%;
-  height: 300px;
-  overflow-y: scroll;
+  max-height: 18.75rem;
+  overflow-y: auto;
   margin-bottom: 15px;
 
   &::-webkit-scrollbar {
