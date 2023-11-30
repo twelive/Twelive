@@ -40,8 +40,7 @@ function Search() {
   };
 
   return (
-    <>
-      {searchValue && <Backdrop onClick={handleInput} />}
+    <Backdrop onClick={handleInput}>
       <Layout>
         {searchValue ? (
           <>
@@ -60,7 +59,7 @@ function Search() {
           <SearchHistory>검색 기록이 없습니다.</SearchHistory>
         )}
       </Layout>
-    </>
+    </Backdrop>
   );
 }
 
@@ -104,7 +103,6 @@ const ListItem = styled.li`
 
 const StyledLink = styled(Link)`
   color: var(--darkmode-color);
-  /* text-decoration: none; */
 `;
 
 const SearchHistory = styled.p`
