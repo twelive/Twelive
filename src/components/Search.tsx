@@ -32,15 +32,22 @@ export default Search;
 
 const Layout = styled.ul`
   position: absolute;
-  top: 3.125rem;
+  top: 2.6563rem;
   left: 50%;
-  width: 25rem;
   height: 30rem;
   border: 0.0625rem solid var(--button-hover-color);
   background: var(--darkmode-bgColor);
   overflow-y: auto;
   z-index: 2;
-  transform: translateX(-55%);
+
+  @media ${(props) => props.theme.tablet} {
+    width: 20.8125rem;
+    transform: translateX(-63.5%);
+  }
+  @media ${(props) => props.theme.laptop} {
+    width: 482.5px;
+    transform: translateX(-60.5%);
+  }
 `;
 
 const ListItem = styled.li`

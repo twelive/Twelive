@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -35,6 +35,7 @@ function Header(): ReactElement {
   const pathname = location.pathname;
 
   const [isInput, setIsInput] = useState(false);
+  const outside = useRef<HTMLDivElement | null>(null);
 
   const isMobile = useMediaQuery({
     query: '(min-width : 20rem) and (max-width : 47.9375rem)',
@@ -76,12 +77,12 @@ function Header(): ReactElement {
   const currentImages = darkMode ? images.darkMode : images.lightMode;
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsInput(true);
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
     dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
   };
 
   const handleInput = () => {
-    console.log('input 클릭');
     setIsInput(!isInput);
   };
 
@@ -154,7 +155,13 @@ function Header(): ReactElement {
                 <HomeLogo src={currentImages.logo} />
               </LeftContainer>
               {/* 검색영역 */}
-              <SearchBox $justifyCenter>
+              <SearchBox
+                ref={outside}
+                onClick={(e) => {
+                  if (e.target == outside.current) setIsInput(false);
+                }}
+                $justifyCenter
+              >
                 <SearchContainer $justifyCenter>
                   <form
                     id="form"
