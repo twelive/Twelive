@@ -77,6 +77,10 @@ function Header(): ReactElement {
     dispatch({ type: 'INPUT_TOGGLE', value: true });
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
     dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
+
+    if (!e.target.value) {
+      e.target.value = '';
+    }
   };
 
   return (
