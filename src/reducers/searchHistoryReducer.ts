@@ -1,5 +1,8 @@
+const storedSearchHistory = localStorage.getItem('searchHistory');
+
 const initialState: SearchHistoryState = {
-  searchHistoryValue: [],
+  searchHistoryValue:
+    storedSearchHistory !== null ? JSON.parse(storedSearchHistory) : [],
 };
 
 function searchHistoryReducer(
@@ -8,6 +11,10 @@ function searchHistoryReducer(
 ) {
   switch (action.type) {
     case 'SEARCHHISTORY_UPDATE': {
+      localStorage.setItem(
+        'searchHistory',
+        JSON.stringify([...state.searchHistoryValue, action.value])
+      );
       return {
         ...state,
         searchHistoryValue: [...state.searchHistoryValue, action.value],
