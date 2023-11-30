@@ -9,10 +9,9 @@ function Search() {
   const { data } = useSelector((state: RootState) => state.data);
   const { searchValue } = useSelector((state: RootState) => state.searchValue);
   const { inputValue } = useSelector((state: RootState) => state.inputValue);
-
-  /*   const { searchHistoryValue } = useSelector(
+  const { searchHistoryValue } = useSelector(
     (state: RootState) => state.searchHistoryValue
-  ); */
+  );
 
   const filterValue = data.items.filter((item: VideoItem) => {
     return item.snippet.title.toUpperCase().includes(searchValue.toUpperCase());
@@ -56,7 +55,17 @@ function Search() {
             ))}
           </>
         ) : (
-          <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+          <>
+            {searchHistoryValue ? (
+              <>
+                {searchHistoryValue.map((item: string, index: number) => (
+                  <ListItem key={index}>{item}</ListItem>
+                ))}
+              </>
+            ) : (
+              <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+            )}
+          </>
         )}
       </Layout>
     </Backdrop>

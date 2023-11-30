@@ -30,7 +30,7 @@ function Header(): ReactElement {
   const dispatch = useDispatch();
   const { toggleMenu } = useSelector((state: RootState) => state.toggleMenu);
   const { inputValue } = useSelector((state: RootState) => state.inputValue);
-  // const { searchValue } = useSelector((state: RootState) => state.searchValue);
+  const { searchValue } = useSelector((state: RootState) => state.searchValue);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const location = useLocation();
@@ -77,15 +77,26 @@ function Header(): ReactElement {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: 'INPUT_TOGGLE', value: true });
     dispatch({ type: 'SEARCH_INPUT', value: e.target.value });
-    dispatch({ type: 'SEARCHHISORY_UPDATE', value: e.target.value });
   };
 
+  // 검색어 초기화
   useEffect(() => {
     if (!inputValue && inputRef.current) {
       inputRef.current.value = '';
       dispatch({ type: 'SEARCH_INPUT', value: '' });
     }
   }, [inputValue, inputRef]);
+
+  // 검색기록 저장
+  const handleSubmit = () => {
+    dispatch({ type: 'SEARCHHISTORY_ADD', value: searchValue });
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
 
   return (
     <div>
@@ -96,12 +107,7 @@ function Header(): ReactElement {
               <SearchMobileContainer>
                 <HeaderBackButton src={currentImages.back} />
                 <SearchContainer $justifyCenter>
-                  <form
-                    id="form"
-                    name="form"
-                    action="/videos/popular.json"
-                    method="GET"
-                  >
+                  <form onClick={(e) => e.preventDefault()}>
                     <fieldset className="search">
                       <input
                         type="text"
@@ -111,6 +117,7 @@ function Header(): ReactElement {
                         placeholder="검색"
                         autoComplete="off"
                         onChange={handleSearch}
+                        onKeyDown={handleKeyPress}
                       />
                     </fieldset>
                   </form>
@@ -119,6 +126,7 @@ function Header(): ReactElement {
                     src={search}
                     title="영상검색"
                     type="submit"
+                    onClick={handleSubmit}
                   ></HeaderButton>
                 </SearchContainer>
                 <DarkMode src={currentImages.darkModeButton} />
@@ -157,20 +165,9 @@ function Header(): ReactElement {
                 <HomeLogo src={currentImages.logo} />
               </LeftContainer>
               {/* 검색영역 */}
-              <SearchBox
-                // ref={outside}
-                // onClick={(e) => {
-                //   if (e.target == outside.current) setIsInput(false);
-                // }}
-                $justifyCenter
-              >
+              <SearchBox $justifyCenter>
                 <SearchContainer $justifyCenter>
-                  <form
-                    id="form"
-                    name="form"
-                    action="/videos/popular.json"
-                    method="GET"
-                  >
+                  <form onClick={(e) => e.preventDefault()}>
                     <fieldset className="search">
                       <input
                         type="text"
@@ -179,8 +176,9 @@ function Header(): ReactElement {
                         title="영상검색"
                         placeholder="검색"
                         autoComplete="off"
-                        onChange={handleSearch}
                         ref={inputRef}
+                        onChange={handleSearch}
+                        onKeyDown={handleKeyPress}
                       />
                     </fieldset>
                   </form>
@@ -189,6 +187,7 @@ function Header(): ReactElement {
                     src={search}
                     title="영상검색"
                     type="submit"
+                    onClick={handleSubmit}
                   ></HeaderButton>
                 </SearchContainer>
                 <HeaderButton

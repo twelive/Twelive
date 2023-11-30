@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -47,15 +47,15 @@ function SearchPage() {
         </>
       ) : (
         <>
-          {/* {searchHistoryValue ? (
+          {searchHistoryValue ? (
             <>
-              {searchHistoryValue.map((item: VideoItem) => (
-                <ListItem key={item.id}>{item.snippet.title}</ListItem>
+              {searchHistoryValue.map((item: string, index: number) => (
+                <ListItem key={index}>{item}</ListItem>
               ))}
             </>
-          ) : ( */}
-          <SearchHistory>검색 기록이 없습니다.</SearchHistory>
-          {/*   )} */}
+          ) : (
+            <SearchHistory>검색 기록이 없습니다.</SearchHistory>
+          )}
         </>
       )}
     </ul>
