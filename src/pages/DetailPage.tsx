@@ -2,9 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import CommentItem from '@/components/CommentItem';
-import Spinner from '@/components/Spinner';
-import ErrorPage from './ErrorPage';
+
+import CommentItem from '@components/CommentItem';
+import Spinner from '@components/Spinner';
+import ErrorPage from '@pages/ErrorPage';
 
 function DetailPage() {
   const dispatch = useDispatch();
@@ -52,8 +53,7 @@ function DetailPage() {
 
       try {
         const response = await fetch(
-          `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
-          // `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         );
 
         const data = await response.json();

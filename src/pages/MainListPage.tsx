@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { motion } from 'framer-motion';
-import Spinner from '@/components/Spinner';
-import ErrorPage from './ErrorPage';
+
+import Spinner from '@components/Spinner';
+import ErrorPage from '@pages/ErrorPage';
 
 function MainListPage() {
   const navigate = useNavigate();
@@ -18,8 +19,7 @@ function MainListPage() {
     setIsError(true);
     try {
       const response = await fetch(
-        '/videos/popular.json'
-        // `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=kr&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=kr&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
       );
       const list = await response.json();
       dispatch({ type: 'DATA_FETCH', payload: list.items });

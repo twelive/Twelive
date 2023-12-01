@@ -1,6 +1,7 @@
 import React from 'react';
-import Logo from '@/assets/common-logo.svg';
 import styled from 'styled-components';
+import Logo from '@assets/common-logo.svg';
+
 function ErrorPage() {
   return (
     <ErrorBox>

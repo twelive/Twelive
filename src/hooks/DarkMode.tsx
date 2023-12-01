@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import HeaderButton from '@/components/HeaderButton';
+import HeaderButton from '@components/HeaderButton';
 
 interface DarkModeProps {
   src: string;

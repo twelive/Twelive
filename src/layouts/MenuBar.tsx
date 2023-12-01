@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import menu from '@assets/common-menu.svg';
 import whitemenu from '@assets/common-whitemenu.svg';
 import shorts from '@assets/common-shorts.svg';
@@ -9,13 +10,10 @@ import subscribe from '@assets/common-subscribe.svg';
 import whitesubscribe from '@assets/common-whitesubscribe.svg';
 import playlist from '@assets/common-playlist.svg';
 import whiteplaylist from '@assets/common-whiteplaylist.svg';
-
 import rank from '@assets/common-rank.svg';
 import whiterank from '@assets/common-whiterank.svg';
 import shopping from '@assets/common-shopping.svg';
 import whiteshopping from '@assets/common-whiteshopping.svg';
-import music from '@assets/common-music.svg';
-import whitemusic from '@assets/common-whitemusic.svg';
 import history from '@assets/common-history.svg';
 import whitehistory from '@assets/common-whitehistory.svg';
 import movie from '@assets/common-movie.svg';
@@ -49,6 +47,7 @@ function MenuBar(): ReactElement {
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
   };
+
   const images = {
     darkMode: {
       menu: whitemenu,
@@ -66,8 +65,7 @@ function MenuBar(): ReactElement {
       educate: whiteeducate,
       podcast: whitepodcast,
       mainlogo: whitemainlogo,
-
-        },
+    },
     lightMode: {
       menu: menu,
       shorts: shorts,
@@ -106,8 +104,6 @@ function MenuBar(): ReactElement {
     { name: 'podcast', icon: currentImages.podcast, label: 'Podcast' },
   ];
 
-
-
   return (
     <>
       {toggleMenu && <Backdrop onClick={handleToggle} />}
@@ -117,7 +113,11 @@ function MenuBar(): ReactElement {
             <img src={currentImages.menu} alt="메뉴" onClick={handleToggle} />
           </button>
           <button>
-            <HomeImg src={currentImages.mainlogo} alt="트웰리브" onClick={handleToggle} />
+            <HomeImg
+              src={currentImages.mainlogo}
+              alt="트웰리브"
+              onClick={handleToggle}
+            />
           </button>
         </Div>
         <Ul>
@@ -178,8 +178,6 @@ const Div = styled.div`
     background-color: transparent;
     border-style: none;
     cursor: pointer;
-
-    
   }
 `;
 
