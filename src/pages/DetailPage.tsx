@@ -2,9 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import CommentItem from '@/components/CommentItem';
-import Spinner from '@/components/Spinner';
-import ErrorPage from './ErrorPage';
+import YouTube from 'react-youtube';
+
+import CommentItem from '@components/CommentItem';
+import Spinner from '@components/Spinner';
+import ErrorPage from '@pages/ErrorPage';
 
 function DetailPage() {
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function DetailPage() {
   const { data } = useSelector((state: RootState) => state.data);
   const { channelId } = useSelector((state: RootState) => state.channelId);
   const [detailData, setDetailData] = useState([]);
-  const { snippet } = data.items.find(
+  const { snippet, id } = data.items.find(
     (i: VideoItem) => channelId === i.snippet.channelId
   );
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +54,7 @@ function DetailPage() {
 
       try {
         const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=200&key=${process.env.REACT_APP_IS_YOUTUBE_API_KEY}`
         );
 
         const data = await response.json();
@@ -71,6 +73,19 @@ function DetailPage() {
     setRenderedData(detailData.slice(0, itemCount));
   }, [detailData, itemCount]);
 
+  // 영상재생
+  const opts = {
+    width: '100%',
+    height: 500,
+    'box-sizing': 'border-box',
+    playerVars: {
+      autoplay: 1,
+      rel: 0,
+      modestbranding: 1,
+      mute: true,
+    },
+  };
+
   if (isLoading) return <Spinner />;
   if (isError) return <ErrorPage />;
 
@@ -79,12 +94,16 @@ function DetailPage() {
       {renderedData && (
         <Box key={channelId}>
           <MainBox>
-            <Video
-              controls
-              src={snippet.thumbnails.maxres.url}
-              poster={snippet.thumbnails.maxres.url}
-              title={snippet.title}
-            />
+            <VideoContainer>
+              <YouTube
+                key={id}
+                videoId={id}
+                opts={opts}
+                onEnd={(e) => {
+                  e.target.stopVideo(0);
+                }}
+              />
+            </VideoContainer>
             <VideoContent>
               <h2>{snippet.title}</h2>
               <dl>
@@ -147,8 +166,7 @@ const MainBox = styled.div`
   }
 `;
 
-const Video = styled.video`
-  width: 100%;
+const VideoContainer = styled.div`
   margin-top: var(--primary-margin);
   border-radius: 0.625rem;
 `;
@@ -216,11 +234,11 @@ const ScrollBox = styled.div`
   }
 
   @media ${(props) => props.theme.tablet} {
-    height: calc(100vh - 400px);
+    height: calc(100vh - 25rem);
   }
 
   @media ${(props) => props.theme.laptop} {
-    height: calc(100vh - 10px);
+    height: calc(100vh - 0.625rem);
   }
 `;
 
@@ -248,10 +266,6 @@ const SubImgBox = styled.div`
       width: 100%;
       height: 20vh;
       object-fit: unset;
-
-      @media (min-width: 26.875rem) {
-        height: 25vh;
-      }
 
       @media (min-width: 28.75rem) {
         height: 30vh;

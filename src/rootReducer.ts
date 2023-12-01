@@ -6,6 +6,7 @@ import toggleReducer from '@reducers/toggleReducer';
 import themeReducer from '@reducers/themeReducer';
 import searchReducer from '@reducers/searchReducer';
 import searchHistoryReducer from '@reducers/searchHistoryReducer';
+import inputReducer from '@reducers/inputReducer';
 
 // Redux의 최상위 리듀서: 여러 리듀서를 하나로 합치는 역할
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   channelId: detailReducer,
   searchValue: searchReducer,
   searchHistoryValue: searchHistoryReducer,
+  inputValue: inputReducer,
   toggleMenu: toggleReducer,
   darkMode: themeReducer,
 });

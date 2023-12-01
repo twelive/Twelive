@@ -14,6 +14,10 @@ interface SearchHistoryState {
   searchHistoryValue: string[];
 }
 
+interface InputState {
+  inputValue: boolean;
+}
+
 interface ToggleState {
   toggleMenu: boolean;
 }
@@ -42,8 +46,13 @@ type SearchAction = {
 };
 
 type SearchHistoryAction = {
-  type: 'SEARCHHISTORY_UPDATE';
+  type: 'SEARCHHISTORY_ADD';
   value?: string;
+};
+
+type InputAction = {
+  type: 'INPUT_TOGGLE';
+  value?: boolean;
 };
 
 type ToggleAction = {
